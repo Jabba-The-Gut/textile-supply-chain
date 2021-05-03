@@ -1,0 +1,24 @@
+{
+  "name": "textile-supply-chain-ethereum",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chance": "^1.1.7",
+    "openzeppelin-solidity": "4.1.0"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-helpers": "^0.5.11",
+    "chai": "^4.3.4",
+    "openzeppelin-test-helpers": "^0.5.1"
+  }
+}

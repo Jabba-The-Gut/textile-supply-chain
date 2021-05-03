@@ -1,0 +1,63 @@
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.4.22 <0.9.0;
+
+import "./Enums.sol";
+
+library Structs {
+    /**
+     * struct that represents an entity that can make controls
+     */
+    struct ControlEntity {
+        Enums.ControlRole role;
+        string description;
+        uint256 numberOfControls;
+    }
+
+    /**
+     * struct that represents an entity in the supply chain
+     */
+    struct SupplyChainEntity {
+        Enums.SupplyChainRole role;
+        string tier;
+        bool gseStatus;
+        GSEControl[] controls;
+        NonGSETransaction[] transactions;
+    }
+
+    /**
+     * struct that represents a control to check wheter the
+     * circumstances of the "Grundsatzerklärung" are met or not
+     */
+    struct GSEControl {
+        uint256 controlId;
+        uint256 timeOfControl;
+        Enums.ControlStatus status;
+        address controlled;
+        address controller;
+    }
+
+    /**
+     * struct that represents the findings in a GSE-control
+     */
+    struct GSEControlDetails {
+        bool gseOK;
+        bytes32[] findings;
+    }
+
+    /**
+     * struct that represents a transaction of a NFT with one of the parties
+     * either sender or receiver not accepting or acknowledging the "Grundsatzerklärung"
+     */
+    struct NonGSETransaction {
+        uint256 time;
+        uint256 tokenId;
+    }
+
+    /**
+     * struct that represents the metadate belonging to a NFT
+     */
+    struct Metadata {
+        uint256 itemId;
+        uint256[] sourceItemIds;
+    }
+}

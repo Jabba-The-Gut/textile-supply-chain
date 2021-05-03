@@ -1,0 +1,89 @@
+{
+    "contractName": "Test",
+    "abi": [],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/jabbathegut/repositories/textile-supply-chain-ethereum/contracts/Test.sol\":\"Test\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/jabbathegut/repositories/textile-supply-chain-ethereum/contracts/Test.sol\":{\"keccak256\":\"0x7e554e08d77ce1bceea0309570a5396eafb71d91bdbc590fd67d56d789868017\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4cbe38764dbd357c671971345fe7703d98bec097871a384012c76152c51c2112\",\"dweb:/ipfs/QmTw2ECQJcW1S9UWfNsVZdCgXgsig9AMyW7yNLgkCzSpFx\"]},\"/Users/jabbathegut/repositories/textile-supply-chain-ethereum/node_modules/openzeppelin-solidity/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0xfeccdcbf67b2006a715e5af1a4c7556004d95b2806552b5cc54e46e8eb7e887b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://45b1f9043c0fb450272f20ed19ef633fcba1b129d602651a856dfae1a2243a2c\",\"dweb:/ipfs/QmUTSQiDikkcNtTtyDpkEwCM5ztVUUh9c1inBukn6HC5Vr\"]},\"/Users/jabbathegut/repositories/textile-supply-chain-ethereum/node_modules/openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xf8e8d118a7a8b2e134181f7da655f6266aa3a0f9134b2605747139fcb0c5d835\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9ec48567e7ad06acb670980d5cdf3fd7f3949bf12894f02d68c3bb43e75aa84f\",\"dweb:/ipfs/QmaG3R2J9cz92YT77vFjYrjMNU2wHp4ypwYD62HqDUqS5U\"]},\"/Users/jabbathegut/repositories/textile-supply-chain-ethereum/node_modules/openzeppelin-solidity/contracts/token/ERC20/extensions/IERC20Metadata.sol\":{\"keccak256\":\"0x83fe24f5c04a56091e50f4a345ff504c8bff658a76d4c43b16878c8f940c53b2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d4c3df1a7ca104b633a7d81c6c6f5192367d150cd5a32cba81f7f27012729013\",\"dweb:/ipfs/QmSim72e3ZVsfgZt8UceCvbiSuMRHR6WDsiamqNzZahGSY\"]},\"/Users/jabbathegut/repositories/textile-supply-chain-ethereum/node_modules/openzeppelin-solidity/contracts/utils/Context.sol\":{\"keccak256\":\"0xf930d2df426bfcfc1f7415be724f04081c96f4fb9ec8d0e3a521c07692dface0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fc2bfdea0d2562c76fb3c4cf70a86c6ba25c5a30e8f8515c95aafdf8383f8395\",\"dweb:/ipfs/QmTbFya18786ckJfLYUoWau9jBTKfmWnWm5XSViWvB7PXN\"]}},\"version\":1}",
+    "bytecode": "6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220c0921411cd599ab09d498404350e1fd0cafb47b99ed2fc0dacffcc73b434516964736f6c63430008000033",
+    "deployedBytecode": "6080604052600080fdfea2646970667358221220c0921411cd599ab09d498404350e1fd0cafb47b99ed2fc0dacffcc73b434516964736f6c63430008000033",
+    "sourceMap": "206:18:0:-:0;;;;;;;;;;;;;;;;;;;",
+    "deployedSourceMap": "206:18:0:-:0;;;;;",
+    "sourcePath": "/Users/jabbathegut/repositories/textile-supply-chain-ethereum/contracts/Test.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.0+commit.c7dfd78e"
+    },
+    "ast": {
+        "absolutePath": "/Users/jabbathegut/repositories/textile-supply-chain-ethereum/contracts/Test.sol",
+        "exportedSymbols": {
+            "Context": [
+                636
+            ],
+            "ERC20": [
+                510
+            ],
+            "IERC20": [
+                588
+            ],
+            "IERC20Metadata": [
+                613
+            ],
+            "Test": [
+                3
+            ]
+        },
+        "id": 4,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 1,
+                "literals": [
+                    "solidity",
+                    ">=",
+                    "0.4",
+                    ".22",
+                    "<",
+                    "0.9",
+                    ".0"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "32:32:0"
+            },
+            {
+                "absolutePath": "/Users/jabbathegut/repositories/textile-supply-chain-ethereum/node_modules/openzeppelin-solidity/contracts/token/ERC20/ERC20.sol",
+                "file": "/Users/jabbathegut/repositories/textile-supply-chain-ethereum/node_modules/openzeppelin-solidity/contracts/token/ERC20/ERC20.sol",
+                "id": 2,
+                "nodeType": "ImportDirective",
+                "scope": 4,
+                "sourceUnit": 511,
+                "src": "66:138:0",
+                "symbolAliases": [],
+                "unitAlias": ""
+            },
+            {
+                "abstract": false,
+                "baseContracts": [],
+                "contractDependencies": [],
+                "contractKind": "contract",
+                "fullyImplemented": true,
+                "id": 3,
+                "linearizedBaseContracts": [
+                    3
+                ],
+                "name": "Test",
+                "nodeType": "ContractDefinition",
+                "nodes": [],
+                "scope": 4,
+                "src": "206:18:0"
+            }
+        ],
+        "src": "32:192:0"
+    },
+    "functionHashes": {},
+    "gasEstimates": {
+        "creation": {
+            "codeDepositCost": "12600",
+            "executionCost": "66",
+            "totalCost": "12666"
+        }
+    }
+}
