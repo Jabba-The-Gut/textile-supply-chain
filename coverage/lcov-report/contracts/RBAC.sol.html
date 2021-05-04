@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/RBAC.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> RBAC.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>25/25</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">55.56% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>10/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>26/26</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">55×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">31×</span>
+<span class="cline-any cline-yes">31×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity &gt;=0.4.22 &lt;0.9.0;
+&nbsp;
+import "openzeppelin-solidity/contracts/utils/structs/EnumerableSet.sol";
+import "openzeppelin-solidity/contracts/utils/Address.sol";
+&nbsp;
+/**
+ * Implements Role Based Acces Control using a smart contract. (Originally from
+ * https://github.com/HQ20/contracts/blob/v0.0.2/contracts/access/RBAC.sol and then
+ * adapted to fit newer compiler version)
+ */
+contract RBAC {
+    using EnumerableSet for EnumerableSet.AddressSet;
+    using Address for address;
+&nbsp;
+    mapping(string =&gt; EnumerableSet.AddressSet) private _roles;
+    mapping(string =&gt; bool) _roleIds;
+&nbsp;
+    event RoleCreated(string roleId);
+    event MemberAdded(address member, string roleId);
+    event MemberRemoved(address member, string roleId);
+&nbsp;
+    string public constant ROOT_ROLE = "ROOT";
+    string public constant CONTROL_ROLE = "CONTROL";
+    string public constant SUPPLY_CHAIN_ENTITY_ROLE = "SUPPLY_CHAIN_ENTITY";
+&nbsp;
+    /**
+     * @notice The contract initializer
+     */
+    constructor() public {
+        _roles[ROOT_ROLE].add(msg.sender);
+        _roleIds[ROOT_ROLE] = true;
+&nbsp;
+        addRole(CONTROL_ROLE);
+        addRole(SUPPLY_CHAIN_ENTITY_ROLE);
+&nbsp;
+        emit RoleCreated(ROOT_ROLE);
+        emit RoleCreated(CONTROL_ROLE);
+        emit RoleCreated(SUPPLY_CHAIN_ENTITY_ROLE);
+        emit MemberAdded(msg.sender, ROOT_ROLE);
+    }
+&nbsp;
+    /**
+     * @notice A method to verify if a role exists.
+     * @param _roleId The id of the role being verified.
+     * @return True or false.
+     */
+    function roleExists(string memory _roleId) public view returns (bool) {
+        return (_roleIds[_roleId]);
+    }
+&nbsp;
+    /**
+     * @notice A method to verify whether an member is a member of a role
+     * @param _member The member to verify.
+     * @param _roleId The role to look into.
+     * @return Whether the member is a member of the role.
+     */
+    function hasRole(address _member, string memory _roleId)
+        public
+        view
+        returns (bool)
+    {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(roleExists(_roleId), "Role doesn't exist.");
+        return _roles[_roleId].contains(_member);
+    }
+&nbsp;
+    /**
+     * @notice A method to create a new role.
+     * @param _roleId The id for role that is being created
+     */
+    function addRole(string memory _roleId) private {
+        // require(_roleId != NO_ROLE, "Reserved role id.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(!roleExists(_roleId), "Role already exists.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(hasRole(msg.sender, ROOT_ROLE), "Caller address is not an admin.");
+&nbsp;
+        _roles[_roleId];
+        _roleIds[_roleId] = true;
+        emit RoleCreated(_roleId);
+    }
+    
+    /**
+     * @notice A method to add a member to a role
+     * @param _member The member to add as a member.
+     * @param _roleId The role to add the member to.
+     */
+    function addMember(address _member, string memory _roleId) public {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(roleExists(_roleId), "Role doesn't exist.");
+        require(
+            _roles[ROOT_ROLE].contains(msg.sender),
+            "Caller address can't add members."
+        );
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(
+            !hasRole(_member, _roleId),
+            "Address is already member of role."
+        );
+&nbsp;
+        _roles[_roleId].add(_member);
+        emit MemberAdded(_member, _roleId);
+    }
+&nbsp;
+    /**
+     * @notice A method to remove a member from a role
+     * @param _member The member to remove as a member.
+     * @param _roleId The role to remove the member from.
+     */
+    function removeMember(address _member, string memory _roleId) public {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(roleExists(_roleId), "Role doesn't exist.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(
+            _roles[ROOT_ROLE].contains(msg.sender),
+            "Caller address can't remove members."
+        );
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(hasRole(_member, _roleId), "Address is not member of role.");
+&nbsp;
+        _roles[_roleId].remove(_member);
+        emit MemberRemoved(_member, _roleId);
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue May 04 2021 21:19:15 GMT+0200 (GMT+02:00)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

@@ -20,10 +20,25 @@ const { assert } = require('chai');
 //The Modern JavaScript Tutorial : http://javascript.info/
 
 contract("Role Based Access Test Suite", async accounts => {
+    let chance;
+    let admin;
+    let rbac;
 
     "use strict";
 
+    // deploy contracts used to test
+    async function deployContracts() {
+        let chance = new Chance();
+        let admin = chance.pickone(accounts);
+        let rbac = await RBAC.new({ from: admin });
+        console.debug(`New RBAC contract deployed - address: ${rbac.address}`);
+        return [chance, admin, rbac];
+    }
+
     before(async () => {
+        // deploy contract
+        [chance, admin, rbac] = await deployContracts();
+
         const output = [];
         for (const acct of accounts) {
             await web3.eth.personal.unlockAccount(acct);
@@ -34,32 +49,18 @@ contract("Role Based Access Test Suite", async accounts => {
         console.table(output);
     });
 
-    async function createFixtures() {
-        const chance = new Chance();
-        const admin = chance.pickone(accounts);
-        const rbac = await RBAC.new({ from: admin });
-        console.debug(`New RBAC contract deployed - address: ${rbac.address}`);
-        return [chance, admin, rbac];
-    }
-
 
     it("check that initial roles are present", async () => {
-        const [chance, admin, rbac] = await createFixtures();
-
         assert.isTrue((await rbac.roleExists("ROOT")), "ROOT_ROLE not present");
         assert.isTrue((await rbac.roleExists("CONTROL")), "CONTROL_ROLE not present");
         assert.isTrue((await rbac.roleExists("SUPPLY_CHAIN_ENTITY")), "SUPPLY_CHAIN_ENTITY_ROLE not present");
     });
 
     it("check that the deployer has the admin role", async () => {
-        const [chance, admin, rbac] = await createFixtures();
-
         assert.isTrue((await rbac.hasRole(admin, "ROOT")), "Contract Deployer should have ROOT_ROLE");
     });
 
     it("check that address with admin role can add new members to roles", async () => {
-        const [chance, admin, rbac] = await createFixtures();
-
         // add random member to a role
         const random_member = chance.pickone(accounts);
         await rbac.addMember(random_member, "CONTROL", { from: admin });
@@ -67,16 +68,17 @@ contract("Role Based Access Test Suite", async accounts => {
     });
 
     it("check that address without an admin role cannot add new members to roles", async () => {
-        const [chance, admin, rbac] = await createFixtures();
-
         // select random member and try to add them to a role from the random member address
-        const random_member = chance.pickone(accounts);
+        var random_member = chance.pickone(accounts);
+
+        // make sure that random member is not the admin account
+        while (admin == random_member) {
+            random_member = chance.pickone(accounts);
+        }
         await expectRevert.unspecified(rbac.addMember(random_member, "CONTROL", { from: random_member }));
     });
 
     it("add member to address, check that he has the role, then remove him and check that he lost he role", async () => {
-        const [chance, admin, rbac] = await createFixtures();
-
         // select random member 
         const random_member = chance.pickone(accounts);
         // ad the member to the role

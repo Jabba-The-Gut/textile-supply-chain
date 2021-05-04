@@ -28,6 +28,10 @@ contract Control {
             access.hasRole(msg.sender, access.CONTROL_ROLE()),
             "Account is not a control instance."
         );
+        require(
+            access.hasRole(_controlled, access.SUPPLY_CHAIN_ENTITY_ROLE()),
+            "Account to be controlled is not a supply chain entity."
+        );
 
         // generate id of control process
         controlId.increment();
@@ -45,6 +49,7 @@ contract Control {
 
     /**
      * @notice Report findings during control
+     * @param _controlId of the control
      * @param _findings made during control
      */
     function reportFindingsForControl(
