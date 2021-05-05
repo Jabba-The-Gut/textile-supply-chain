@@ -15,15 +15,15 @@
     "absolutePath": "/Users/jabbathegut/repositories/textile-supply-chain-ethereum/contracts/Enums.sol",
     "exportedSymbols": {
       "Enums": [
-        384
+        432
       ]
     },
-    "id": 385,
+    "id": 433,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 368,
+        "id": 416,
         "literals": [
           "solidity",
           ">=",
@@ -42,31 +42,31 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 384,
+        "id": 432,
         "linearizedBaseContracts": [
-          384
+          432
         ],
         "name": "Enums",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "Enums.ControlStage",
-            "id": 372,
+            "id": 420,
             "members": [
               {
-                "id": 369,
+                "id": 417,
                 "name": "Registered",
                 "nodeType": "EnumValue",
                 "src": "196:10:2"
               },
               {
-                "id": 370,
+                "id": 418,
                 "name": "Findings",
                 "nodeType": "EnumValue",
                 "src": "208:8:2"
               },
               {
-                "id": 371,
+                "id": 419,
                 "name": "Archived",
                 "nodeType": "EnumValue",
                 "src": "218:8:2"
@@ -78,16 +78,16 @@
           },
           {
             "canonicalName": "Enums.ControlStatus",
-            "id": 375,
+            "id": 423,
             "members": [
               {
-                "id": 373,
+                "id": 421,
                 "name": "Accepted",
                 "nodeType": "EnumValue",
                 "src": "328:8:2"
               },
               {
-                "id": 374,
+                "id": 422,
                 "name": "NotAccepted",
                 "nodeType": "EnumValue",
                 "src": "338:11:2"
@@ -99,22 +99,22 @@
           },
           {
             "canonicalName": "Enums.ControlRole",
-            "id": 379,
+            "id": 427,
             "members": [
               {
-                "id": 376,
+                "id": 424,
                 "name": "Inspector",
                 "nodeType": "EnumValue",
                 "src": "458:9:2"
               },
               {
-                "id": 377,
+                "id": 425,
                 "name": "QualityControl",
                 "nodeType": "EnumValue",
                 "src": "469:14:2"
               },
               {
-                "id": 378,
+                "id": 426,
                 "name": "Risk",
                 "nodeType": "EnumValue",
                 "src": "485:4:2"
@@ -126,22 +126,22 @@
           },
           {
             "canonicalName": "Enums.SupplyChainRole",
-            "id": 383,
+            "id": 431,
             "members": [
               {
-                "id": 380,
+                "id": 428,
                 "name": "Delivery",
                 "nodeType": "EnumValue",
                 "src": "599:8:2"
               },
               {
-                "id": 381,
+                "id": 429,
                 "name": "Producer",
                 "nodeType": "EnumValue",
                 "src": "609:8:2"
               },
               {
-                "id": 382,
+                "id": 430,
                 "name": "External",
                 "nodeType": "EnumValue",
                 "src": "619:8:2"
@@ -152,7 +152,7 @@
             "src": "577:51:2"
           }
         ],
-        "scope": 385,
+        "scope": 433,
         "src": "99:531:2"
       }
     ],
@@ -162,15 +162,15 @@
     "absolutePath": "/Users/jabbathegut/repositories/textile-supply-chain-ethereum/contracts/Enums.sol",
     "exportedSymbols": {
       "Enums": [
-        384
+        432
       ]
     },
-    "id": 385,
+    "id": 433,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 368,
+        "id": 416,
         "literals": [
           "solidity",
           ">=",
@@ -189,31 +189,31 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 384,
+        "id": 432,
         "linearizedBaseContracts": [
-          384
+          432
         ],
         "name": "Enums",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "Enums.ControlStage",
-            "id": 372,
+            "id": 420,
             "members": [
               {
-                "id": 369,
+                "id": 417,
                 "name": "Registered",
                 "nodeType": "EnumValue",
                 "src": "196:10:2"
               },
               {
-                "id": 370,
+                "id": 418,
                 "name": "Findings",
                 "nodeType": "EnumValue",
                 "src": "208:8:2"
               },
               {
-                "id": 371,
+                "id": 419,
                 "name": "Archived",
                 "nodeType": "EnumValue",
                 "src": "218:8:2"
@@ -225,16 +225,16 @@
           },
           {
             "canonicalName": "Enums.ControlStatus",
-            "id": 375,
+            "id": 423,
             "members": [
               {
-                "id": 373,
+                "id": 421,
                 "name": "Accepted",
                 "nodeType": "EnumValue",
                 "src": "328:8:2"
               },
               {
-                "id": 374,
+                "id": 422,
                 "name": "NotAccepted",
                 "nodeType": "EnumValue",
                 "src": "338:11:2"
@@ -246,22 +246,22 @@
           },
           {
             "canonicalName": "Enums.ControlRole",
-            "id": 379,
+            "id": 427,
             "members": [
               {
-                "id": 376,
+                "id": 424,
                 "name": "Inspector",
                 "nodeType": "EnumValue",
                 "src": "458:9:2"
               },
               {
-                "id": 377,
+                "id": 425,
                 "name": "QualityControl",
                 "nodeType": "EnumValue",
                 "src": "469:14:2"
               },
               {
-                "id": 378,
+                "id": 426,
                 "name": "Risk",
                 "nodeType": "EnumValue",
                 "src": "485:4:2"
@@ -273,22 +273,22 @@
           },
           {
             "canonicalName": "Enums.SupplyChainRole",
-            "id": 383,
+            "id": 431,
             "members": [
               {
-                "id": 380,
+                "id": 428,
                 "name": "Delivery",
                 "nodeType": "EnumValue",
                 "src": "599:8:2"
               },
               {
-                "id": 381,
+                "id": 429,
                 "name": "Producer",
                 "nodeType": "EnumValue",
                 "src": "609:8:2"
               },
               {
-                "id": 382,
+                "id": 430,
                 "name": "External",
                 "nodeType": "EnumValue",
                 "src": "619:8:2"
@@ -299,7 +299,7 @@
             "src": "577:51:2"
           }
         ],
-        "scope": 385,
+        "scope": 433,
         "src": "99:531:2"
       }
     ],
@@ -311,7 +311,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-03T15:51:46.058Z",
+  "updatedAt": "2021-05-05T14:26:34.334Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

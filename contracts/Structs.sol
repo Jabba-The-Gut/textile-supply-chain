@@ -41,7 +41,7 @@ library Structs {
      */
     struct GSEControlDetails {
         bool gseOK;
-        bytes32[] findings;
+        string[] findings;
     }
 
     /**

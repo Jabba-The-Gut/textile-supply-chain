@@ -15,6 +15,17 @@ contract Control {
     mapping(uint256 => ControlStateMachine) private controls;
     RBAC private access;
 
+    event ControlCreated(
+        uint256 controlId,
+        address controlledEntity,
+        address controlEntity
+    );
+    event FindingsForControlReported(
+        uint256 controlId,
+        Structs.GSEControlDetails findings
+    );
+    event ControlFinished(Structs.GSEControl control);
+
     constructor(address _rbacAddress) public {
         access = RBAC(_rbacAddress);
     }
@@ -45,6 +56,8 @@ contract Control {
         // store mapping of control process
         controlIndex[controlId.current()] = true;
         controls[controlId.current()] = proc;
+
+        emit ControlCreated(controlId.current(), _controlled, msg.sender);
     }
 
     /**
@@ -60,8 +73,11 @@ contract Control {
             access.hasRole(msg.sender, access.CONTROL_ROLE()),
             "Account is not a control instance."
         );
-        require(controlIndex[_controlId], "No control with giben ID.");
+        require(controlIndex[_controlId], "No control with given ID.");
+        require(controls[_controlId].controller() == msg.sender, "Only the controller can add findings.");
         controls[_controlId].addFindings(_findings);
+
+        emit FindingsForControlReported(_controlId, _findings);
     }
 
     /**
@@ -76,8 +92,27 @@ contract Control {
             "Caller address is not part of the supply chain."
         );
         require(controlIndex[_controlId], "No control with given ID.");
+        require(controls[_controlId].controlled() == msg.sender, "Only controlled entity can acknowledge.");
 
         // get the given control process instance
-        controls[_controlId].commentControl(_opinion);
+        ControlStateMachine instance = controls[_controlId];
+        instance.commentControl();
+
+        Enums.ControlStatus status;
+        if (_opinion) {
+            status = Enums.ControlStatus.Accepted;
+        } else {
+            status = Enums.ControlStatus.NotAccepted;
+        }
+
+        emit ControlFinished(
+            Structs.GSEControl({
+                controlId: _controlId,
+                timeOfControl: instance.created(),
+                status: status,
+                controlled: instance.controlled(),
+                controller: instance.controller()
+            })
+        );
     }
 }
