@@ -51,7 +51,6 @@ library Structs {
     struct NonGSETransaction {
         uint256 time;
         uint256 tokenId;
-        address[2] violators;
     }
 
     /**

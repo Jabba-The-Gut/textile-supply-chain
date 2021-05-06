@@ -4,11 +4,13 @@ pragma solidity >=0.4.22 <0.9.0;
 import "openzeppelin-solidity/contracts/utils/Counters.sol";
 import "./RBAC.sol";
 import "./ControlStateMachine.sol";
+import "openzeppelin-solidity/contracts/utils/Context.sol";
+
 
 /**
  * Contract that acts as a gateway to the control state machine
  */
-contract Control {
+contract Control is Context{
     using Counters for Counters.Counter;
     Counters.Counter private controlId;
     mapping(uint256 => bool) private controlIndex;
@@ -36,7 +38,7 @@ contract Control {
      */
     function startControl(address _controlled) public {
         require(
-            access.hasRole(msg.sender, access.CONTROL_ROLE()),
+            access.hasRole(_msgSender(), access.SUPPLY_CHAIN_CONTROL_ENTITY_ROLE()),
             "Account is not a control instance."
         );
         require(
@@ -50,14 +52,14 @@ contract Control {
         ControlStateMachine proc =
             new ControlStateMachine(
                 _controlled,
-                msg.sender,
+                _msgSender(),
                 controlId.current()
             );
         // store mapping of control process
         controlIndex[controlId.current()] = true;
         controls[controlId.current()] = proc;
 
-        emit ControlCreated(controlId.current(), _controlled, msg.sender);
+        emit ControlCreated(controlId.current(), _controlled, _msgSender());
     }
 
     /**
@@ -70,11 +72,11 @@ contract Control {
         Structs.GSEControlDetails memory _findings
     ) public {
         require(
-            access.hasRole(msg.sender, access.CONTROL_ROLE()),
+            access.hasRole(_msgSender(), access.SUPPLY_CHAIN_CONTROL_ENTITY_ROLE()),
             "Account is not a control instance."
         );
         require(controlIndex[_controlId], "No control with given ID.");
-        require(controls[_controlId].controller() == msg.sender, "Only the controller can add findings.");
+        require(controls[_controlId].controller() == _msgSender(), "Only the controller can add findings.");
         controls[_controlId].addFindings(_findings);
 
         emit FindingsForControlReported(_controlId, _findings);
@@ -88,11 +90,11 @@ contract Control {
      */
     function acknowledgeControl(uint256 _controlId, bool _opinion) public {
         require(
-            access.hasRole(msg.sender, access.SUPPLY_CHAIN_ENTITY_ROLE()),
+            access.hasRole(_msgSender(), access.SUPPLY_CHAIN_ENTITY_ROLE()),
             "Caller address is not part of the supply chain."
         );
         require(controlIndex[_controlId], "No control with given ID.");
-        require(controls[_controlId].controlled() == msg.sender, "Only controlled entity can acknowledge.");
+        require(controls[_controlId].controlled() == _msgSender(), "Only controlled entity can acknowledge.");
 
         // get the given control process instance
         ControlStateMachine instance = controls[_controlId];

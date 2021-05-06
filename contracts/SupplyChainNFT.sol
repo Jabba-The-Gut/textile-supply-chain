@@ -42,7 +42,7 @@ contract SupplyChainNFT is ERC721, Ownable {
         onlyOwner
     {
         require(
-            rbac.hasRole(msg.sender, rbac.SUPPLY_CHAIN_ENTITY_ROLE()),
+            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE()),
             "Only supply chain entities can create tokens"
         );
 
@@ -95,23 +95,18 @@ contract SupplyChainNFT is ERC721, Ownable {
             registry.getSupplyChainEntity(_from);
 
         if (!toEntity.gseStatus || !fromEntity.gseStatus) {
-            address[2] memory violator;
-
-            if (!toEntity.gseStatus) {
-                violator[0] = _to;
-            }
-            if (!fromEntity.gseStatus) {
-                violator[1] = _from;
-            }
-
             Structs.NonGSETransaction memory transaction =
                 Structs.NonGSETransaction({
                     time: block.timestamp,
-                    tokenId: _tokenId,
-                    violators: violator
+                    tokenId: _tokenId
                 });
 
-            registry.addNonGSETransaction(transaction);
+            if (!toEntity.gseStatus) {
+                registry.addNonGSETransaction(_to, transaction);
+            }
+            if (!fromEntity.gseStatus) {
+                registry.addNonGSETransaction(_from, transaction);
+            }
         }
     }
 }
