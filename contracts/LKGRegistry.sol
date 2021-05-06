@@ -4,16 +4,24 @@ pragma solidity >=0.4.22 <0.9.0;
 import "./Structs.sol";
 import "./RBAC.sol";
 import "openzeppelin-solidity/contracts/utils/Context.sol";
+import "openzeppelin-solidity/contracts/utils/Counters.sol";
 
 /**
- * Contract that works as registry for all detials regarding the supply chain
+ * Contract that works as registry for all details regarding the supply chain
  */
 contract LKGRegistry is Context {
+    using Counters for Counters.Counter;
+    Counters.Counter private controlCounter;
+    Counters.Counter private nonGseCounter;
     RBAC private rbac;
     mapping(address => bool) private entitiesIndex;
     mapping(address => Structs.SupplyChainEntity) private supplyChainEntities;
     mapping(address => bool) private controlEntitiesIndex;
     mapping(address => Structs.ControlEntity) private controlEntities;
+    mapping(uint256 => Structs.GSEControl) controls;
+    mapping(uint256 => Structs.NonGSETransaction) transactions;
+    mapping(uint256 => bool) controlIndex;
+    mapping(uint256 => bool) nonGseIndex;
 
     constructor(address _rbac) public {
         rbac = RBAC(_rbac);
@@ -138,7 +146,43 @@ contract LKGRegistry is Context {
         onlyChainAdmin
     {
         require(entitiesIndex[_entity], "Entity does not exist");
-        supplyChainEntities[_entity].controls.push(_control);
+
+        controlCounter.increment();
+        controlIndex[controlCounter.current()] = true;
+        controls[controlCounter.current()] = _control;
+        supplyChainEntities[_entity].controls[
+            controlCounter.current()
+        ] = controlCounter.current();
+    }
+
+    /**
+     * @notice Get a control that was made
+     * @param _controlId id of the control
+     * * @return control with the given id
+     */
+    function getControl(uint256 _controlId)
+        public
+        view
+        onlyChainMember
+        returns (Structs.GSEControl memory)
+    {
+        require(controlIndex[_controlId], "Control does not exist");
+        return controls[_controlId];
+    }
+
+    /**
+     * @notice Get a list of control ids that were made for a supply chain entity
+     * @param _entity The entity to get the control ids for
+     *@return Array of control ids
+     */
+    function getControls(address _entity)
+        public
+        view
+        onlyChainMember
+        returns (uint256[] memory)
+    {
+        require(entitiesIndex[_entity], "Entity does not exist");
+        return supplyChainEntities[_entity].controls;
     }
 
     /**
@@ -151,32 +195,40 @@ contract LKGRegistry is Context {
         Structs.NonGSETransaction memory _transaction
     ) public onlyChainAdmin {
         require(entitiesIndex[_entity], "Entity does not exits");
-        supplyChainEntities[_entity].transactions.push(_transaction);
+
+        nonGseCounter.increment();
+        nonGseIndex[nonGseCounter.current()] = true;
+        transactions[nonGseCounter.current()] = _transaction;
+        supplyChainEntities[_entity].transactions[
+            nonGseCounter.current()
+        ] = nonGseCounter.current();
     }
 
     /**
-     * @notice Get the list of controls for a given supply chain entity
-     * @return Array of controls
+     * @notice Get a non gse transaction that was made
+     * @param _transactionIndex id of the transaction
+     * * @return transaction with the given id
      */
-    function listControlsOfSupplyChainEntity(address _entity)
+    function getNonGSETransaction(uint256 _transactionIndex)
         public
         view
         onlyChainMember
-        returns (Structs.GSEControl[] memory)
+        returns (Structs.NonGSETransaction memory)
     {
-        require(entitiesIndex[_entity], "Entity does not exist");
-        return supplyChainEntities[_entity].controls;
+        require(nonGseIndex[_transactionIndex], "Transaction does not exist");
+        return transactions[_transactionIndex];
     }
 
     /**
-     * @notice Get the list of NonGSETransactions for a given supply chain entity
-     * @return Array of transactions
+     * @notice Get a list of transaction ids that were recorded for a supply chain entity
+     * @param _entity The entity to get the transaction ids for
+     * @return Array of transaction ids
      */
-    function listNonGSETransactionsOfSupplyChainEntity(address _entity)
+    function getNonGSETransactions(address _entity)
         public
         view
         onlyChainMember
-        returns (Structs.NonGSETransaction[] memory)
+        returns (uint256[] memory)
     {
         require(entitiesIndex[_entity], "Entity does not exist");
         return supplyChainEntities[_entity].transactions;

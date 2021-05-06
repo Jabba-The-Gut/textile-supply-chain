@@ -20,8 +20,8 @@ library Structs {
         Enums.SupplyChainRole role;
         string tier;
         bool gseStatus;
-        GSEControl[] controls;
-        NonGSETransaction[] transactions;
+        uint256[] controls;
+        uint256[] transactions;
     }
 
     /**
