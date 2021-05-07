@@ -1,5 +1,6 @@
 const RBAC = artifacts.require("RBAC");
 const CONTROL = artifacts.require("Control");
+const REGISTRY = artifacts.require("LKGRegistry");
 const CONTROL_STAT_MACHINE = artifacts.require('ControlStateMachine');
 const Chance = require('chance');
 const toBN = web3.utils.toBN;
@@ -24,10 +25,10 @@ const truffleAssert = require('truffle-assertions');
 //The Modern JavaScript Tutorial : http://javascript.info/
 
 contract("Control Test Suite", async accounts => {
-    let chance;
-    let admin;
+    let chance_instance;
+    let rbac_admin;
     let rbac;
-    let owner;
+    let registry;
     let control;
     var control_addresses = [];
     var supply_chain_addresses = [];
@@ -38,31 +39,39 @@ contract("Control Test Suite", async accounts => {
     // deploy contracts used to test
     async function deployContracts() {
         let chance = new Chance();
-        let admin = chance.pickone(accounts);
-        let rbac = await RBAC.new({ from: admin });
-        let owner = chance.pickone(accounts);
-        let control = await CONTROL.new(rbac.address, { from: owner });
+        let rbac_admin_address = chance.pickone(accounts);
+        let rbac = await RBAC.new({ from: rbac_admin_address });
+        let registry = await REGISTRY.new(rbac.address)
+        let control = await CONTROL.new(rbac.address, registry.address);
         console.debug(`New Control contract deployed - address: ${control.address}`);
-        return [chance, admin, rbac, owner, control];
+        return [chance, rbac_admin_address, rbac, registry, control];
     }
 
     // setup environment before tests
     before(async () => {
         // deploy contracts
-        [chance, admin, rbac, owner, control] = await deployContracts();
+        [chance_instance, rbac_admin, rbac, registry, control] = await deployContracts();
 
         // setup addresses
-        control_addresses = accounts.slice(0, 3);
-        supply_chain_addresses = accounts.slice(4, 7);
+        control_addresses = accounts.slice(0, 2);
+        supply_chain_addresses = accounts.slice(3, 7);
         normal_addresses = accounts.slice(8, 9);
 
-        // assign roles to addresses
+        // add address of control contract to admin role ( so he can create registry entries)
+        rbac.addMember(control.address, "ADMIN", {from: rbac_admin});
+
+        // add supply chain admin role to rbac_admin so he can add entities to the registry
+        rbac.addMember(rbac_admin, "ADMIN", {from: rbac_admin});
+
+        // assign roles to addresses and add them to registry
         control_addresses.forEach(address => {
-            rbac.addMember(address, "CONTROL", { from: admin });
+            rbac.addMember(address, "CONTROL", { from: rbac_admin });
+            registry.addControlEntity(address, {role: 0, description: "tier 4", gseStatus: 0, numberOfControls: 0}, {from: rbac_admin});
         });
 
         supply_chain_addresses.forEach(address => {
-            rbac.addMember(address, "SUPPLY_CHAIN_ENTITY", { from: admin });
+            rbac.addMember(address, "SUPPLY_CHAIN_ENTITY", { from: rbac_admin });
+            registry.addSupplyChainEntity(address, {role: 0, tier: "tier 4", gseStatus: 0, controls: [], transactions: []}, {from: rbac_admin});
         });
 
         const output = [];
@@ -75,14 +84,16 @@ contract("Control Test Suite", async accounts => {
         console.table(output);
     });
 
+    
     it("check that only addresses with the control role can start a control and only supply chain entities can be controlled", async () => {
-        await expectRevert(control.startControl(chance.pickone(supply_chain_addresses), { from: chance.pickone(normal_addresses) }), "Account is not a control instance.");
-        await expectRevert.unspecified(control.startControl(chance.pickone(normal_addresses), { from: chance.pickone(control_addresses) }), "Account to be controlled is not a supply chain entity.");
+        await expectRevert(control.startControl(chance_instance.pickone(supply_chain_addresses), { from: chance_instance.pickone(normal_addresses) }), "Account is not a control instance.");
+        await expectRevert(control.startControl(chance_instance.pickone(normal_addresses), { from: chance_instance.pickone(control_addresses) }), "Account to be controlled is not a supply chain entity.");
     });
 
+
     it("happy path: check events and transitions", async () => {
-        var controlled = chance.pickone(supply_chain_addresses);
-        var controller = chance.pickone(control_addresses);
+        var controlled = chance_instance.pickone(supply_chain_addresses);
+        var controller = chance_instance.pickone(control_addresses);
 
         // create control
         let new_control = await control.startControl(controlled, { from: controller });
@@ -100,9 +111,10 @@ contract("Control Test Suite", async accounts => {
         await expectEvent(acknowledge, 'ControlFinished');
     })
 
+    
     it("check that methods cannot be called on finished control", async () => {
-        var controlled = chance.pickone(supply_chain_addresses);
-        var controller = chance.pickone(control_addresses);
+        var controlled = chance_instance.pickone(supply_chain_addresses);
+        var controller = chance_instance.pickone(control_addresses);
 
         // create control
         await control.startControl(controlled, { from: controller });
@@ -120,14 +132,15 @@ contract("Control Test Suite", async accounts => {
         await expectRevert(control.acknowledgeControl(2, 1, { from: controlled }), "Method not executable at this stage of the control process");
     })
 
+     
     it("check only the control address can add findings to a control started by the address", async () => {
-        var controlled = chance.pickone(supply_chain_addresses);
-        var controller = chance.pickone(control_addresses);
-        var other_controller = chance.pickone(control_addresses);
+        var controlled = chance_instance.pickone(supply_chain_addresses);
+        var controller = chance_instance.pickone(control_addresses);
+        var other_controller = chance_instance.pickone(control_addresses);
 
         // make sure the control addresses are different
         while (controller == other_controller) {
-            other_controller = chance.pickone(control_addresses);
+            other_controller = chance_instance.pickone(control_addresses);
 
         }
 
@@ -135,16 +148,24 @@ contract("Control Test Suite", async accounts => {
         await control.startControl(controlled, { from: controller });
 
         await expectRevert(control.reportFindingsForControl(3, { gseOK: 1, findings: ["test"] }, { from: other_controller }), "Only the controller can add findings.")
+        // add findings to control
+        let addFindings = await control.reportFindingsForControl(3, { gseOK: 1, findings: ["test"] }, { from: controller });
+        // check that findings reported event is emitted
+        await expectEvent(addFindings, 'FindingsForControlReported');
+        // comment findings
+        let acknowledge = await control.acknowledgeControl(3, 0, { from: controlled });
+        // check that findings reported event is emitted
+        await expectEvent(acknowledge, 'ControlFinished');
     })
 
     it("check that only the controlled address can acknowledge a control they were controlled in", async () => {
-        var controlled = chance.pickone(supply_chain_addresses);
-        var controller = chance.pickone(control_addresses);
-        var other_controlled = chance.pickone(supply_chain_addresses);
+        var controlled = chance_instance.pickone(supply_chain_addresses);
+        var controller = chance_instance.pickone(control_addresses);
+        var other_controlled = chance_instance.pickone(supply_chain_addresses);
 
         // make sure the controlled addresses are different
         while (controlled == other_controlled) {
-            other_controlled = chance.pickone(supply_chain_addresses);
+            other_controlled = chance_instance.pickone(supply_chain_addresses);
         }
 
         // create control
@@ -162,11 +183,10 @@ contract("Control Test Suite", async accounts => {
     })
 
     it("check that only existing controls can be addressed", async () => {
-        var controlled = chance.pickone(supply_chain_addresses);
-        var controller = chance.pickone(control_addresses);
+        var controlled = chance_instance.pickone(supply_chain_addresses);
+        var controller = chance_instance.pickone(control_addresses);
 
         await expectRevert(control.reportFindingsForControl(5, { gseOK: 1, findings: ["test"] }, { from: controller }), "No control with given ID.");
         await expectRevert(control.acknowledgeControl(5, 1, { from: controlled }), "No control with given ID.");
     })
-
 });

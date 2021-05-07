@@ -5,6 +5,8 @@ import "openzeppelin-solidity/contracts/utils/Counters.sol";
 import "./RBAC.sol";
 import "./ControlStateMachine.sol";
 import "openzeppelin-solidity/contracts/utils/Context.sol";
+import "./LKGRegistry.sol";
+
 
 
 /**
@@ -16,6 +18,7 @@ contract Control is Context{
     mapping(uint256 => bool) private controlIndex;
     mapping(uint256 => ControlStateMachine) private controls;
     RBAC private access;
+    LKGRegistry private registry;
 
     event ControlCreated(
         uint256 controlId,
@@ -28,8 +31,9 @@ contract Control is Context{
     );
     event ControlFinished(Structs.GSEControl control);
 
-    constructor(address _rbacAddress) public {
+    constructor(address _rbacAddress, address _registryAddress) public {
         access = RBAC(_rbacAddress);
+        registry = LKGRegistry(_registryAddress);
     }
 
     /**
@@ -107,14 +111,18 @@ contract Control is Context{
             status = Enums.ControlStatus.NotAccepted;
         }
 
-        emit ControlFinished(
-            Structs.GSEControl({
+        Structs.GSEControl memory control = Structs.GSEControl({
                 controlId: _controlId,
                 timeOfControl: instance.created(),
                 status: status,
                 controlled: instance.controlled(),
                 controller: instance.controller()
-            })
+            });
+
+        registry.addControl(instance.controlled(), control);
+
+        emit ControlFinished(
+            control
         );
     }
 }

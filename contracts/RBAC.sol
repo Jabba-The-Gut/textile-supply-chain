@@ -36,6 +36,7 @@ contract RBAC is Context{
 
         addRole(SUPPLY_CHAIN_CONTROL_ENTITY_ROLE);
         addRole(SUPPLY_CHAIN_ENTITY_ROLE);
+        addRole(SUPPLY_CHAIN_ADMIN_ROLE);
 
         emit RoleCreated(ROOT_ROLE);
         emit RoleCreated(SUPPLY_CHAIN_CONTROL_ENTITY_ROLE);

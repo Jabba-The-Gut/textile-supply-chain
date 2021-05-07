@@ -20,6 +20,8 @@ contract SupplyChainNFT is ERC721, Ownable {
     string public symbol;
     mapping(uint256 => Structs.Metadata) metadata;
 
+    event NonGSETransaction(Structs.NonGSETransaction);
+
     constructor(
         string memory _name,
         string memory _symbol,
@@ -107,6 +109,8 @@ contract SupplyChainNFT is ERC721, Ownable {
             if (!fromEntity.gseStatus) {
                 registry.addNonGSETransaction(_from, transaction);
             }
+
+           emit NonGSETransaction(transaction);
         }
     }
 }

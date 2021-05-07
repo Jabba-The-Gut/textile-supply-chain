@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/LKGRegistry.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> LKGRegistry.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">33.33% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>14/42</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.11% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>4/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">31.25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>5/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">32.61% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>15/46</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity &gt;=0.4.22 &lt;0.9.0;
+&nbsp;
+import "./Structs.sol";
+import "./RBAC.sol";
+import "openzeppelin-solidity/contracts/utils/Context.sol";
+import "openzeppelin-solidity/contracts/utils/Counters.sol";
+&nbsp;
+/**
+ * Contract that works as registry for all details regarding the supply chain
+ */
+contract LKGRegistry is Context {
+    using Counters for Counters.Counter;
+    Counters.Counter private controlCounter;
+    Counters.Counter private nonGseCounter;
+    RBAC private rbac;
+    mapping(address =&gt; bool) private entitiesIndex;
+    mapping(address =&gt; Structs.SupplyChainEntity) private supplyChainEntities;
+    mapping(address =&gt; bool) private controlEntitiesIndex;
+    mapping(address =&gt; Structs.ControlEntity) private controlEntities;
+    mapping(uint256 =&gt; Structs.GSEControl) controls;
+    mapping(uint256 =&gt; Structs.NonGSETransaction) transactions;
+    mapping(uint256 =&gt; bool) controlIndex;
+    mapping(uint256 =&gt; bool) nonGseIndex;
+&nbsp;
+    constructor(address _rbac) public {
+        rbac = RBAC(_rbac);
+    }
+&nbsp;
+    /**
+     * @notice Checks that caller has the role of a supply chain  admin
+     */
+    modifier onlyChainAdmin() {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(
+            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ADMIN_ROLE()),
+            "Only supply chain admin can call this function"
+        );
+        _;
+    }
+&nbsp;
+    /**
+     *@notice Check that the caller is part of the supply chain
+     */
+<span class="fstat-no" title="function not covered" >    modifier onlyChainMember() {</span>
+<span class="cstat-no" title="statement not covered" >        require(</span>
+            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_CONTROL_ENTITY_ROLE()),
+            "Not a chain member"
+        );
+<span class="cstat-no" title="statement not covered" >        require(</span>
+            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE()),
+            "Not a chain member"
+        );
+        _;
+    }
+&nbsp;
+    /**
+     * @notice Add a supply chain entity to the registry
+     * @param _address Address of the account belonging to the entity
+     * @param _entity The entity to be added
+     */
+    function addSupplyChainEntity(
+        address _address,
+        Structs.SupplyChainEntity memory _entity
+    ) public onlyChainAdmin {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(!entitiesIndex[_address], "Entity already existing");
+&nbsp;
+        entitiesIndex[_address] = true;
+        supplyChainEntities[_address] = _entity;
+    }
+&nbsp;
+    /**
+     * @notice Get the supply chain entity belonging to the address
+     * @param _entity Address of the entity
+     * @return Supply chain entity
+     */
+<span class="fstat-no" title="function not covered" >    function getSupplyChainEntity(address _entity)</span>
+        public
+        view
+        onlyChainMember
+        returns (Structs.SupplyChainEntity memory)
+    {
+<span class="cstat-no" title="statement not covered" >        require(entitiesIndex[_entity], "Entity does not exist")</span>;
+<span class="cstat-no" title="statement not covered" >        return supplyChainEntities[_entity];</span>
+    }
+&nbsp;
+    /**
+     * @notice Remove a supply chain entity from the registry
+     * @param _entity Address of the entity
+     */
+<span class="fstat-no" title="function not covered" >    function removeSupplyChainEntity(address _entity) public onlyChainAdmin {</span>
+<span class="cstat-no" title="statement not covered" >        require(entitiesIndex[_entity], "Entity does not exist")</span>;
+<span class="cstat-no" title="statement not covered" >        entitiesIndex[_entity] = false</span>;
+        delete (supplyChainEntities[_entity]);
+    }
+&nbsp;
+    /**
+     * @notice Add control entity to registry
+     * @param _address of the entity
+     *@param _entity to add
+     */
+    function addControlEntity(
+        address _address,
+        Structs.ControlEntity memory _entity
+    ) public onlyChainAdmin {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(!controlEntitiesIndex[_address], "Entity already exists");
+        controlEntitiesIndex[_address] = true;
+        controlEntities[_address] = _entity;
+    }
+&nbsp;
+    /**
+     * @notice Get the control entity from the registry
+     * @param _entity The address of the entity
+     * @return Control entity
+     */
+<span class="fstat-no" title="function not covered" >    function getControlentity(address _entity)</span>
+        public
+        view
+        onlyChainMember
+        returns (Structs.ControlEntity memory)
+    {
+<span class="cstat-no" title="statement not covered" >        require(controlEntitiesIndex[_entity], "Entity does not exist")</span>;
+<span class="cstat-no" title="statement not covered" >        return controlEntities[_entity];</span>
+    }
+&nbsp;
+    /**
+     * @notice Remove a control entity from the registry
+     * @param _entity The address of the entity to be removed
+     */
+<span class="fstat-no" title="function not covered" >    function removeControlEntity(address _entity) public onlyChainAdmin {</span>
+<span class="cstat-no" title="statement not covered" >        require(controlEntitiesIndex[_entity], "Entity does not exist")</span>;
+<span class="cstat-no" title="statement not covered" >        controlEntitiesIndex[_entity] = false</span>;
+        delete (controlEntitiesIndex[_entity]);
+    }
+&nbsp;
+    /**
+     * @notice Add control to supply chain entity
+     * @param _entity The supply chain entity to add the control to
+     * @param _control The control to add
+     */
+    function addControl(address _entity, Structs.GSEControl memory _control)
+        public
+        onlyChainAdmin
+    {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(entitiesIndex[_entity], "Entity does not exist");
+&nbsp;
+        controlCounter.increment();
+        // update control index
+        controlIndex[controlCounter.current()] = true;
+        // add control struct to the mapping
+        controls[controlCounter.current()] = _control;
+        // add control id to the supply chain entity
+        supplyChainEntities[_entity].controls.push(controlCounter.current());
+        // increment number of controls for controller
+        controlEntities[_control.controller].numberOfControls += 1;
+    }
+&nbsp;
+    /**
+     * @notice Get a control that was made
+     * @param _controlId id of the control
+     * * @return control with the given id
+     */
+<span class="fstat-no" title="function not covered" >    function getControl(uint256 _controlId)</span>
+        public
+        view
+        onlyChainMember
+        returns (Structs.GSEControl memory)
+    {
+<span class="cstat-no" title="statement not covered" >        require(controlIndex[_controlId], "Control does not exist")</span>;
+<span class="cstat-no" title="statement not covered" >        return controls[_controlId];</span>
+    }
+&nbsp;
+    /**
+     * @notice Get a list of control ids that were made for a supply chain entity
+     * @param _entity The entity to get the control ids for
+     *@return Array of control ids
+     */
+<span class="fstat-no" title="function not covered" >    function getControls(address _entity)</span>
+        public
+        view
+        onlyChainMember
+        returns (uint256[] memory)
+    {
+<span class="cstat-no" title="statement not covered" >        require(entitiesIndex[_entity], "Entity does not exist")</span>;
+<span class="cstat-no" title="statement not covered" >        return supplyChainEntities[_entity].controls;</span>
+    }
+&nbsp;
+    /**
+     * @notice Add nonGSETransaction to supply chain entity
+     * @param _entity The supply chain entity to add the transaction to
+     * @param _transaction The transaction to add
+     */
+<span class="fstat-no" title="function not covered" >    function addNonGSETransaction(</span>
+        address _entity,
+        Structs.NonGSETransaction memory _transaction
+    ) public onlyChainAdmin {
+<span class="cstat-no" title="statement not covered" >        require(entitiesIndex[_entity], "Entity does not exits")</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        nonGseCounter.increment()</span>;
+        // update transaction index
+<span class="cstat-no" title="statement not covered" >        nonGseIndex[nonGseCounter.current()] = true</span>;
+        // add transaction struct to the mapping
+<span class="cstat-no" title="statement not covered" >        transactions[nonGseCounter.current()] = _transaction</span>;
+        // add transaction id to the supply chain entity
+<span class="cstat-no" title="statement not covered" >        supplyChainEntities[_entity].transactions.push(nonGseCounter.current())</span>;
+&nbsp;
+    }
+&nbsp;
+    /**
+     * @notice Get a non gse transaction that was made
+     * @param _transactionIndex id of the transaction
+     * * @return transaction with the given id
+     */
+<span class="fstat-no" title="function not covered" >    function getNonGSETransaction(uint256 _transactionIndex)</span>
+        public
+        view
+        onlyChainMember
+        returns (Structs.NonGSETransaction memory)
+    {
+<span class="cstat-no" title="statement not covered" >        require(nonGseIndex[_transactionIndex], "Transaction does not exist")</span>;
+<span class="cstat-no" title="statement not covered" >        return transactions[_transactionIndex];</span>
+    }
+&nbsp;
+    /**
+     * @notice Get a list of transaction ids that were recorded for a supply chain entity
+     * @param _entity The entity to get the transaction ids for
+     * @return Array of transaction ids
+     */
+<span class="fstat-no" title="function not covered" >    function getNonGSETransactions(address _entity)</span>
+        public
+        view
+        onlyChainMember
+        returns (uint256[] memory)
+    {
+<span class="cstat-no" title="statement not covered" >        require(entitiesIndex[_entity], "Entity does not exist")</span>;
+<span class="cstat-no" title="statement not covered" >        return supplyChainEntities[_entity].transactions;</span>
+    }
+&nbsp;
+    /**
+     * @notice A control or supply chain entity can acknowledge that they have red and accepted the "GSE"
+     */
+<span class="fstat-no" title="function not covered" >    function acknowledgeGSE() public onlyChainMember {</span>
+<span class="cstat-no" title="statement not covered" >        require(</span>
+            entitiesIndex[_msgSender()] || controlEntitiesIndex[_msgSender()],
+            "Entity does not exist"
+        );
+<span class="cstat-no" title="statement not covered" >        if (</span>
+            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_CONTROL_ENTITY_ROLE())
+        ) {
+<span class="cstat-no" title="statement not covered" >            controlEntities[_msgSender()].gseStatus = true</span>;
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE())) {</span>
+<span class="cstat-no" title="statement not covered" >            supplyChainEntities[_msgSender()].gseStatus = true</span>;
+        }
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri May 07 2021 11:27:46 GMT+0200 (GMT+02:00)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

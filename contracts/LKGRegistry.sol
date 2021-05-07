@@ -50,10 +50,6 @@ contract LKGRegistry is Context {
             rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE()),
             "Not a chain member"
         );
-        require(
-            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ADMIN_ROLE()),
-            "Not a chain member"
-        );
         _;
     }
 
@@ -148,11 +144,14 @@ contract LKGRegistry is Context {
         require(entitiesIndex[_entity], "Entity does not exist");
 
         controlCounter.increment();
+        // update control index
         controlIndex[controlCounter.current()] = true;
+        // add control struct to the mapping
         controls[controlCounter.current()] = _control;
-        supplyChainEntities[_entity].controls[
-            controlCounter.current()
-        ] = controlCounter.current();
+        // add control id to the supply chain entity
+        supplyChainEntities[_entity].controls.push(controlCounter.current());
+        // increment number of controls for controller
+        controlEntities[_control.controller].numberOfControls += 1;
     }
 
     /**
@@ -197,11 +196,13 @@ contract LKGRegistry is Context {
         require(entitiesIndex[_entity], "Entity does not exits");
 
         nonGseCounter.increment();
+        // update transaction index
         nonGseIndex[nonGseCounter.current()] = true;
+        // add transaction struct to the mapping
         transactions[nonGseCounter.current()] = _transaction;
-        supplyChainEntities[_entity].transactions[
-            nonGseCounter.current()
-        ] = nonGseCounter.current();
+        // add transaction id to the supply chain entity
+        supplyChainEntities[_entity].transactions.push(nonGseCounter.current());
+
     }
 
     /**
@@ -232,5 +233,24 @@ contract LKGRegistry is Context {
     {
         require(entitiesIndex[_entity], "Entity does not exist");
         return supplyChainEntities[_entity].transactions;
+    }
+
+    /**
+     * @notice A control or supply chain entity can acknowledge that they have red and accepted the "GSE"
+     */
+    function acknowledgeGSE() public onlyChainMember {
+        require(
+            entitiesIndex[_msgSender()] || controlEntitiesIndex[_msgSender()],
+            "Entity does not exist"
+        );
+        if (
+            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_CONTROL_ENTITY_ROLE())
+        ) {
+            controlEntities[_msgSender()].gseStatus = true;
+        }
+
+        if (rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE())) {
+            supplyChainEntities[_msgSender()].gseStatus = true;
+        }
     }
 }

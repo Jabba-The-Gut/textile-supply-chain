@@ -10,6 +10,7 @@ library Structs {
     struct ControlEntity {
         Enums.ControlRole role;
         string description;
+        bool gseStatus;
         uint256 numberOfControls;
     }
 
