@@ -29,7 +29,7 @@ contract("Role Based Access Test Suite", async accounts => {
     // deploy contracts used to test
     async function deployContracts() {
         let chance = new Chance();
-        let admin = chance.pickone(accounts);
+        let admin = accounts[0];
         let rbac = await RBAC.new({ from: admin });
         console.debug(`New RBAC contract deployed - address: ${rbac.address}`);
         return [chance, admin, rbac];

@@ -43,11 +43,11 @@ contract LKGRegistry is Context {
      */
     modifier onlyChainMember() {
         require(
-            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_CONTROL_ENTITY_ROLE()),
-            "Not a chain member"
-        );
-        require(
-            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE()),
+            (rbac.hasRole(
+                _msgSender(),
+                rbac.SUPPLY_CHAIN_CONTROL_ENTITY_ROLE()
+            ) || rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE())) ||
+                rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ADMIN_ROLE()),
             "Not a chain member"
         );
         _;
@@ -202,7 +202,6 @@ contract LKGRegistry is Context {
         transactions[nonGseCounter.current()] = _transaction;
         // add transaction id to the supply chain entity
         supplyChainEntities[_entity].transactions.push(nonGseCounter.current());
-
     }
 
     /**

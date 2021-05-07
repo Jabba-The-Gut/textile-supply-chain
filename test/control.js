@@ -39,7 +39,7 @@ contract("Control Test Suite", async accounts => {
     // deploy contracts used to test
     async function deployContracts() {
         let chance = new Chance();
-        let rbac_admin_address = chance.pickone(accounts);
+        let rbac_admin_address = accounts[0];
         let rbac = await RBAC.new({ from: rbac_admin_address });
         let registry = await REGISTRY.new(rbac.address)
         let control = await CONTROL.new(rbac.address, registry.address);
@@ -53,8 +53,8 @@ contract("Control Test Suite", async accounts => {
         [chance_instance, rbac_admin, rbac, registry, control] = await deployContracts();
 
         // setup addresses
-        control_addresses = accounts.slice(0, 2);
-        supply_chain_addresses = accounts.slice(3, 7);
+        control_addresses = accounts.slice(1, 3);
+        supply_chain_addresses = accounts.slice(4, 7);
         normal_addresses = accounts.slice(8, 9);
 
         // add address of control contract to admin role ( so he can create registry entries)

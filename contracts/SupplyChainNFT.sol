@@ -42,10 +42,15 @@ contract SupplyChainNFT is ERC721, Ownable {
     function mintToken(address _owner, Structs.Metadata memory _tokenData)
         public
         onlyOwner
+        returns (uint256)
     {
         require(
             rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE()),
             "Only supply chain entities can create tokens"
+        );
+        require(
+            rbac.hasRole(_owner, rbac.SUPPLY_CHAIN_ENTITY_ROLE()),
+            "Owner must be a supply chain entity"
         );
 
         // increment counter for first tokenID
@@ -57,6 +62,32 @@ contract SupplyChainNFT is ERC721, Ownable {
 
         // add _tokenData to internal mapping
         metadata[tokenID] = _tokenData;
+
+        return tokenID;
+    }
+
+    /**
+     * @notice Transfer token from one entity to another
+     * @param _from sender entity
+     * @param _to receiver entity
+     * @param _tokenId id of the token to be transferred
+     */
+    function transferToken(
+        address _from,
+        address _to,
+        uint256 _tokenId
+    ) public {
+        require(
+            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE()),
+            "Only supply chain entities can transfer tokens"
+        );
+        require(
+            rbac.hasRole(_to, rbac.SUPPLY_CHAIN_ENTITY_ROLE()),
+            "Only supply chain entities can receive tokens"
+        );
+        require(_exists(_tokenId), "Token with given ID does not exist");
+
+        _transfer(_from, _to, _tokenId);
     }
 
     /**
@@ -67,11 +98,11 @@ contract SupplyChainNFT is ERC721, Ownable {
     function getTokenMetadata(uint256 _tokenId)
         public
         view
-        returns (uint256, uint256[] memory)
+        returns (Structs.Metadata memory)
     {
         require(_exists(_tokenId), "Token with give ID does not exist");
 
-        return (metadata[_tokenId].itemId, metadata[_tokenId].sourceItemIds);
+        return metadata[_tokenId];
     }
 
     /**
@@ -90,27 +121,31 @@ contract SupplyChainNFT is ERC721, Ownable {
             rbac.hasRole(_to, rbac.SUPPLY_CHAIN_ENTITY_ROLE()),
             "Only supply chain entities can receive tokens"
         );
-        Structs.SupplyChainEntity memory toEntity =
-            registry.getSupplyChainEntity(_to);
 
-        Structs.SupplyChainEntity memory fromEntity =
-            registry.getSupplyChainEntity(_from);
+        // only check for gse status if it's not a mint or burn operation
+        if (_from != address(0) && _to != address(0)) {
+            Structs.SupplyChainEntity memory toEntity =
+                registry.getSupplyChainEntity(_to);
 
-        if (!toEntity.gseStatus || !fromEntity.gseStatus) {
-            Structs.NonGSETransaction memory transaction =
-                Structs.NonGSETransaction({
-                    time: block.timestamp,
-                    tokenId: _tokenId
-                });
+            Structs.SupplyChainEntity memory fromEntity =
+                registry.getSupplyChainEntity(_from);
 
-            if (!toEntity.gseStatus) {
-                registry.addNonGSETransaction(_to, transaction);
+            if (!toEntity.gseStatus || !fromEntity.gseStatus) {
+                Structs.NonGSETransaction memory transaction =
+                    Structs.NonGSETransaction({
+                        time: block.timestamp,
+                        tokenId: _tokenId
+                    });
+
+                if (!toEntity.gseStatus) {
+                    registry.addNonGSETransaction(_to, transaction);
+                }
+                if (!fromEntity.gseStatus) {
+                    registry.addNonGSETransaction(_from, transaction);
+                }
+
+                emit NonGSETransaction(transaction);
             }
-            if (!fromEntity.gseStatus) {
-                registry.addNonGSETransaction(_from, transaction);
-            }
-
-           emit NonGSETransaction(transaction);
         }
     }
 }
