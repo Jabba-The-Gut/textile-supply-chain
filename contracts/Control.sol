@@ -40,7 +40,7 @@ contract Control is Context{
      * @notice Start control process for given address
      * @param _controlled address of controlled instance
      */
-    function startControl(address _controlled) public {
+    function startControl(address _controlled) public returns (uint256) {
         require(
             access.hasRole(_msgSender(), access.SUPPLY_CHAIN_CONTROL_ENTITY_ROLE()),
             "Account is not a control instance."
@@ -64,6 +64,8 @@ contract Control is Context{
         controls[controlId.current()] = proc;
 
         emit ControlCreated(controlId.current(), _controlled, _msgSender());
+
+        return controlId.current();
     }
 
     /**
