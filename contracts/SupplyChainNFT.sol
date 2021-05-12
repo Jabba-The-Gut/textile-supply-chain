@@ -19,6 +19,7 @@ contract SupplyChainNFT is ERC721, Ownable {
     string public name;
     string public symbol;
     mapping(uint256 => Structs.Metadata) metadata;
+    mapping(uint256 => bool) activeIndex;
 
     event NonGSETransaction(Structs.NonGSETransaction);
 
@@ -62,6 +63,13 @@ contract SupplyChainNFT is ERC721, Ownable {
 
         // add _tokenData to internal mapping
         metadata[tokenID] = _tokenData;
+        // set token as active
+        activeIndex[tokenID] = true;
+        // set all input tokens to inactive, so they cannot be transferred further
+        uint256[] memory inputTokens = _tokenData.sourceTokenIds;
+        for (uint256 i = 0; i < inputTokens.length; i++) {
+            activeIndex[inputTokens[i]] = false;
+        }
 
         return tokenID;
     }
@@ -86,6 +94,10 @@ contract SupplyChainNFT is ERC721, Ownable {
             "Only supply chain entities can receive tokens"
         );
         require(_exists(_tokenId), "Token with given ID does not exist");
+        require(
+            activeIndex[_tokenId],
+            "Token must be active to be transferrable"
+        );
 
         _transfer(_from, _to, _tokenId);
     }

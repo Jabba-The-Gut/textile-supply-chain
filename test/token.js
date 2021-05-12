@@ -91,7 +91,7 @@ contract("NF-Token Test Suite", async accounts => {
 
     it("Try to mint a new token from an address other than the owner", async () => {
         let token_owner = supply_chain_addresses[0];
-        await expectRevert.unspecified(cotton_token.mintToken(token_owner, {itemId: 241, sourceItemIds: []}, {from: token_owner}), "Only token contract owner can mint new tokens");
+        await expectRevert(cotton_token.mintToken(token_owner, {sourceTokenIds: []}, {from: token_owner}), "caller is not the owner");
         ;
     });
 
@@ -104,7 +104,7 @@ contract("NF-Token Test Suite", async accounts => {
         await registry.acknowledgeGSE({from: future_future_owner});
 
         // mint new token
-        let tokenID = await cotton_token.mintToken(future_owner, {itemId: 241, sourceItemIds: []}, {from: owner_of_token_contract});
+        let tokenID = await cotton_token.mintToken(future_owner, {sourceTokenIds: []}, {from: owner_of_token_contract});
         
         //check that the token was created correctly
         assert.strictEqual(await cotton_token.ownerOf(1), future_owner, {from: owner_of_token_contract});
@@ -132,7 +132,7 @@ contract("NF-Token Test Suite", async accounts => {
         await registry.acknowledgeGSE({from: future_owner});
 
         // mint new token
-        await cotton_token.mintToken(future_owner, {itemId: 456, sourceItemIds: [241]}, {from: owner_of_token_contract});
+        await cotton_token.mintToken(future_owner, {sourceTokenIds: []}, {from: owner_of_token_contract});
         
         //check that the token was created correctly
         assert.strictEqual(await cotton_token.ownerOf(2), future_owner, {from: owner_of_token_contract});
@@ -148,7 +148,7 @@ contract("NF-Token Test Suite", async accounts => {
         let entity_future_owner = await registry.getSupplyChainEntity(future_owner, {from: future_owner})
         let entity_future_future_owner= await registry.getSupplyChainEntity(future_future_owner, {from: future_future_owner});
         
-        // check that the valid transaction was recorded as valid (thus not added to the entities)
+        // check that the valid transaction was recorded as valid and invalid as invalid
         assert.equal(entity_future_owner[4].length, 0);
         assert.equal(entity_future_future_owner[4].length, 1)
     });
@@ -158,7 +158,7 @@ contract("NF-Token Test Suite", async accounts => {
         let future_future_owner = supply_chain_addresses[2];
 
         // mint new token
-        await cotton_token.mintToken(future_owner, {itemId: 123, sourceItemIds: [241, 456]}, {from: owner_of_token_contract});
+        await cotton_token.mintToken(future_owner, {sourceTokenIds: [1, 2]}, {from: owner_of_token_contract});
         
         //check that the token was created correctly
         assert.strictEqual(await cotton_token.ownerOf(3), future_owner, {from: owner_of_token_contract});
@@ -180,8 +180,12 @@ contract("NF-Token Test Suite", async accounts => {
 
         // get metadata and check if chain of custody is recorded on token
         let tokenMetadata = await cotton_token.getTokenMetadata(3);
-        assert.equal(tokenMetadata[1][0], 241);
-        assert.equal(tokenMetadata[1][1], 456);
+        assert.equal(tokenMetadata[0][0], 1);
+        assert.equal(tokenMetadata[0][1], 2);
+
+        // check that tokens with ID 241 and 456 are inactive and cannot be transferred anymore
+        await expectRevert(cotton_token.transferToken(future_future_owner, future_owner, 2, {from: future_owner}), "Token must be active to be transferrable");
+        await expectRevert(cotton_token.transferToken(future_future_owner, future_owner, 1, {from: future_owner}), "Token must be active to be transferrable")
     });
 
 });

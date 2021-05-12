@@ -58,7 +58,6 @@ library Structs {
      * struct that represents the metadate belonging to a NFT
      */
     struct Metadata {
-        uint256 itemId;
-        uint256[] sourceItemIds;
+        uint256[] sourceTokenIds;
     }
 }
