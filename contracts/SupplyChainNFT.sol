@@ -42,12 +42,11 @@ contract SupplyChainNFT is ERC721, Ownable {
      */
     function mintToken(address _owner, Structs.Metadata memory _tokenData)
         public
-        onlyOwner
         returns (uint256)
     {
         require(
-            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE()),
-            "Only supply chain entities can create tokens"
+            rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_MINTER_ROLE()),
+            "Not the valid role to create tokens"
         );
         require(
             rbac.hasRole(_owner, rbac.SUPPLY_CHAIN_ENTITY_ROLE()),

@@ -70,6 +70,7 @@ contract("NF-Token Test Suite", async accounts => {
 
         supply_chain_addresses.forEach(address => {
             rbac.addMember(address, "SUPPLY_CHAIN_ENTITY", { from: rbac_admin });
+            rbac.addMember(address, "MINTER", { from: rbac_admin });
             registry.addSupplyChainEntity(address, {role: 0, tier: "tier 4", gseStatus: 0, controls: [], transactions: []}, {from: rbac_admin});
         });
 
@@ -89,10 +90,9 @@ contract("NF-Token Test Suite", async accounts => {
         assert.strictEqual(await cotton_token.symbol(), "CT");
     });
 
-    it("Try to mint a new token from an address other than the owner", async () => {
-        let token_owner = supply_chain_addresses[0];
-        await expectRevert(cotton_token.mintToken(token_owner, {sourceTokenIds: []}, {from: token_owner}), "caller is not the owner");
-        ;
+    it("Try to mint a new token from an address that has not the minter role", async () => {
+        let token_owner = accounts[0];
+        await expectRevert(cotton_token.mintToken(token_owner, {sourceTokenIds: []}, {from: token_owner}), "Not the valid role to create tokens");
     });
 
     it("Mint a new token and then transfer it to another supply chain member (sender and receiver gse OK))", async () => {

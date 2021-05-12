@@ -26,6 +26,8 @@ contract RBAC is Context{
     string public constant SUPPLY_CHAIN_ADMIN_ROLE = "ADMIN";
     string public constant SUPPLY_CHAIN_CONTROL_ENTITY_ROLE = "CONTROL";
     string public constant SUPPLY_CHAIN_ENTITY_ROLE = "SUPPLY_CHAIN_ENTITY";
+    string public constant SUPPLY_CHAIN_MINTER_ROLE = "MINTER";
+
 
     /**
      * @notice The contract initializer
@@ -37,10 +39,13 @@ contract RBAC is Context{
         addRole(SUPPLY_CHAIN_CONTROL_ENTITY_ROLE);
         addRole(SUPPLY_CHAIN_ENTITY_ROLE);
         addRole(SUPPLY_CHAIN_ADMIN_ROLE);
+        addRole(SUPPLY_CHAIN_MINTER_ROLE);
 
         emit RoleCreated(ROOT_ROLE);
         emit RoleCreated(SUPPLY_CHAIN_CONTROL_ENTITY_ROLE);
         emit RoleCreated(SUPPLY_CHAIN_ENTITY_ROLE);
+        emit RoleCreated(SUPPLY_CHAIN_ADMIN_ROLE);
+        emit RoleCreated(SUPPLY_CHAIN_MINTER_ROLE);
         emit MemberAdded(_msgSender(), ROOT_ROLE);
     }
 
