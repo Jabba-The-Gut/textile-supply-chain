@@ -2,7 +2,7 @@ const Migrations = artifacts.require('Migrations');
 const RBAC = artifacts.require('RBAC');
 const Control = artifacts.require('Control');
 const Registry = artifacts.require('LKGRegistry');
-const Token = artifacts.require("SupplyChainNFT");
+const Token = artifacts.require("ChainOfCustodyToken");
 
 module.exports = function (deployer) {
   deployer.deploy(Migrations);

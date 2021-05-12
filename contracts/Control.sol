@@ -7,8 +7,6 @@ import "./ControlStateMachine.sol";
 import "openzeppelin-solidity/contracts/utils/Context.sol";
 import "./LKGRegistry.sol";
 
-
-
 /**
  * Contract that acts as a gateway to the control state machine
  */
@@ -39,6 +37,7 @@ contract Control is Context{
     /**
      * @notice Start control process for given address
      * @param _controlled address of controlled instance
+     * @return id of the control
      */
     function startControl(address _controlled) public returns (uint256) {
         require(
@@ -92,7 +91,7 @@ contract Control is Context{
      * @notice Acknowledge control
      * @param _controlId identifier of the control
      * @param _opinion true if the controlled entity knows about the control and
-     * agrees with the results, false if the entitiy knows about the control but does not agree with the results
+     * agrees with the results, false if the entity knows (or doesn't know) about the control and/or does not agree with the results
      */
     function acknowledgeControl(uint256 _controlId, bool _opinion) public {
         require(

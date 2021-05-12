@@ -2,7 +2,6 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 // This file contains all enums
-
 library Enums {
     /**
      * enum for stages of control process
@@ -10,7 +9,7 @@ library Enums {
     enum ControlStage {Registered, Findings, Archived}
 
     /**
-     * enum for the different status of a finished control
+     * enum for the different states of a finished control
      */
     enum ControlStatus {Accepted, NotAccepted}
 

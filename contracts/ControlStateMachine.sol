@@ -6,7 +6,7 @@ import "./Enums.sol";
 import "./Structs.sol";
 
 /**
- * Contract that handles the control process of an supply chain entity. Is implemented as a state machine.
+ * Contract that handles the control process of a supply chain entity. Is implemented as a state machine.
  */
 contract ControlStateMachine is Ownable {
     uint256 public id;

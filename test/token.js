@@ -1,6 +1,6 @@
 const RBAC = artifacts.require("RBAC");
 const REGISTRY = artifacts.require("LKGRegistry");
-const SupplyChainToken = artifacts.require("SupplyChainNFT")
+const SupplyChainToken = artifacts.require("ChainOfCustodyToken")
 const Chance = require('chance');
 const toBN = web3.utils.toBN;
 const { constants, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');

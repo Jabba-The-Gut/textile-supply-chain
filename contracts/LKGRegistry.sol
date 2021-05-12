@@ -95,7 +95,7 @@ contract LKGRegistry is Context {
 
     /**
      * @notice Add control entity to registry
-     * @param _address of the entity
+     * @param _address of the control entity
      *@param _entity to add
      */
     function addControlEntity(
@@ -108,7 +108,7 @@ contract LKGRegistry is Context {
     }
 
     /**
-     * @notice Get the control entity from the registry
+     * @notice Get a control entity from the registry
      * @param _entity The address of the entity
      * @return Control entity
      */
@@ -157,7 +157,7 @@ contract LKGRegistry is Context {
     /**
      * @notice Get a control that was made
      * @param _controlId id of the control
-     * * @return control with the given id
+     * @return control with the given id
      */
     function getControl(uint256 _controlId)
         public
@@ -207,7 +207,7 @@ contract LKGRegistry is Context {
     /**
      * @notice Get a non gse transaction that was made
      * @param _transactionIndex id of the transaction
-     * * @return transaction with the given id
+     * @return transaction with the given id
      */
     function getNonGSETransaction(uint256 _transactionIndex)
         public

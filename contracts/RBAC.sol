@@ -22,6 +22,7 @@ contract RBAC is Context{
     event MemberAdded(address member, string roleId);
     event MemberRemoved(address member, string roleId);
 
+    // different roles that exist
     string public constant ROOT_ROLE = "ROOT";
     string public constant SUPPLY_CHAIN_ADMIN_ROLE = "ADMIN";
     string public constant SUPPLY_CHAIN_CONTROL_ENTITY_ROLE = "CONTROL";

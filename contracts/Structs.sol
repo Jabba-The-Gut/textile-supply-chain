@@ -26,8 +26,8 @@ library Structs {
     }
 
     /**
-     * struct that represents a control to check wheter the
-     * circumstances of the "Grundsatzerklärung" are met or not
+     * struct that represents a control to check if the
+     * circumstances of the GSE are met or not
      */
     struct GSEControl {
         uint256 controlId;
@@ -47,7 +47,7 @@ library Structs {
 
     /**
      * struct that represents a transaction of a NFT with one of the parties
-     * either sender or receiver not accepting or acknowledging the "Grundsatzerklärung"
+     * (either sender or receiver) not accepting or acknowledging the GSE
      */
     struct NonGSETransaction {
         uint256 time;
@@ -55,7 +55,7 @@ library Structs {
     }
 
     /**
-     * struct that represents the metadate belonging to a NFT
+     * struct that represents the metadata belonging to a NFT
      */
     struct Metadata {
         uint256[] sourceTokenIds;
