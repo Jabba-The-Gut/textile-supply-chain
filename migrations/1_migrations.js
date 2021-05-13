@@ -34,6 +34,7 @@ module.exports = async function (deployer, network, accounts) {
     const token_contract = await Token.deployed();
     
     // setup role management
+    await rbac_contract.addMember(rbac_root_address, "ADMIN", {from:rbac_root_address});
     await rbac_contract.addMember(supply_chain_admin_address, "ADMIN", {from:rbac_root_address});
 
     for (let index = 0; index < producers.length; index++) {
