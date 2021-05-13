@@ -43,10 +43,10 @@ contract LKGRegistry is Context {
      */
     modifier onlyChainMember() {
         require(
-            (rbac.hasRole(
+            rbac.hasRole(
                 _msgSender(),
                 rbac.SUPPLY_CHAIN_CONTROL_ENTITY_ROLE()
-            ) || rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE())) ||
+            ) || rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ENTITY_ROLE()) ||
                 rbac.hasRole(_msgSender(), rbac.SUPPLY_CHAIN_ADMIN_ROLE()),
             "Not a chain member"
         );
