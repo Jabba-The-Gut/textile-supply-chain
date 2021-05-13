@@ -1,0 +1,325 @@
+{
+  "contractName": "Enums",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Enums.sol\":\"Enums\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Enums.sol\":{\"keccak256\":\"0xa377de2908959a9be65421fafae189ea62c621caf19bbc014fb9ff58b20435da\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a8b84d9bd08f9a496df03033a937b03b4c005e81141f7a0edf88db65c35f25ef\",\"dweb:/ipfs/QmNcYFTkXvJyBqZAYriDMbicNxdwUkcBpEXbiQAeXkXPDm\"]}},\"version\":1}",
+  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122011961ebde37fca06a01b292084cc6e76cc5b2c4ea40bde99fff319331f8abd7664736f6c63430008000033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122011961ebde37fca06a01b292084cc6e76cc5b2c4ea40bde99fff319331f8abd7664736f6c63430008000033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "98:531:4:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "98:531:4:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.9.0;\n\n// This file contains all enums\nlibrary Enums {\n    /**\n     * enum for stages of control process\n     */\n    enum ControlStage {Registered, Findings, Archived}\n\n    /**\n     * enum for the different states of a finished control\n     */\n    enum ControlStatus {Accepted, NotAccepted}\n\n    /**\n     * enum for the different roles involved in the control process\n     */\n    enum ControlRole {Inspector, QualityControl, Risk}\n\n    /**\n     * enum for the different roles involved in the supply chain\n     */\n    enum SupplyChainRole {Delivery, Producer, External}\n}\n",
+  "sourcePath": "/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Enums.sol",
+  "ast": {
+    "absolutePath": "/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Enums.sol",
+    "exportedSymbols": {
+      "Enums": [
+        1553
+      ]
+    },
+    "id": 1554,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1537,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:4"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "id": 1553,
+        "linearizedBaseContracts": [
+          1553
+        ],
+        "name": "Enums",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Enums.ControlStage",
+            "id": 1541,
+            "members": [
+              {
+                "id": 1538,
+                "name": "Registered",
+                "nodeType": "EnumValue",
+                "src": "195:10:4"
+              },
+              {
+                "id": 1539,
+                "name": "Findings",
+                "nodeType": "EnumValue",
+                "src": "207:8:4"
+              },
+              {
+                "id": 1540,
+                "name": "Archived",
+                "nodeType": "EnumValue",
+                "src": "217:8:4"
+              }
+            ],
+            "name": "ControlStage",
+            "nodeType": "EnumDefinition",
+            "src": "176:50:4"
+          },
+          {
+            "canonicalName": "Enums.ControlStatus",
+            "id": 1544,
+            "members": [
+              {
+                "id": 1542,
+                "name": "Accepted",
+                "nodeType": "EnumValue",
+                "src": "327:8:4"
+              },
+              {
+                "id": 1543,
+                "name": "NotAccepted",
+                "nodeType": "EnumValue",
+                "src": "337:11:4"
+              }
+            ],
+            "name": "ControlStatus",
+            "nodeType": "EnumDefinition",
+            "src": "307:42:4"
+          },
+          {
+            "canonicalName": "Enums.ControlRole",
+            "id": 1548,
+            "members": [
+              {
+                "id": 1545,
+                "name": "Inspector",
+                "nodeType": "EnumValue",
+                "src": "457:9:4"
+              },
+              {
+                "id": 1546,
+                "name": "QualityControl",
+                "nodeType": "EnumValue",
+                "src": "468:14:4"
+              },
+              {
+                "id": 1547,
+                "name": "Risk",
+                "nodeType": "EnumValue",
+                "src": "484:4:4"
+              }
+            ],
+            "name": "ControlRole",
+            "nodeType": "EnumDefinition",
+            "src": "439:50:4"
+          },
+          {
+            "canonicalName": "Enums.SupplyChainRole",
+            "id": 1552,
+            "members": [
+              {
+                "id": 1549,
+                "name": "Delivery",
+                "nodeType": "EnumValue",
+                "src": "598:8:4"
+              },
+              {
+                "id": 1550,
+                "name": "Producer",
+                "nodeType": "EnumValue",
+                "src": "608:8:4"
+              },
+              {
+                "id": 1551,
+                "name": "External",
+                "nodeType": "EnumValue",
+                "src": "618:8:4"
+              }
+            ],
+            "name": "SupplyChainRole",
+            "nodeType": "EnumDefinition",
+            "src": "576:51:4"
+          }
+        ],
+        "scope": 1554,
+        "src": "98:531:4"
+      }
+    ],
+    "src": "32:598:4"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Enums.sol",
+    "exportedSymbols": {
+      "Enums": [
+        1553
+      ]
+    },
+    "id": 1554,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1537,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:4"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "id": 1553,
+        "linearizedBaseContracts": [
+          1553
+        ],
+        "name": "Enums",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Enums.ControlStage",
+            "id": 1541,
+            "members": [
+              {
+                "id": 1538,
+                "name": "Registered",
+                "nodeType": "EnumValue",
+                "src": "195:10:4"
+              },
+              {
+                "id": 1539,
+                "name": "Findings",
+                "nodeType": "EnumValue",
+                "src": "207:8:4"
+              },
+              {
+                "id": 1540,
+                "name": "Archived",
+                "nodeType": "EnumValue",
+                "src": "217:8:4"
+              }
+            ],
+            "name": "ControlStage",
+            "nodeType": "EnumDefinition",
+            "src": "176:50:4"
+          },
+          {
+            "canonicalName": "Enums.ControlStatus",
+            "id": 1544,
+            "members": [
+              {
+                "id": 1542,
+                "name": "Accepted",
+                "nodeType": "EnumValue",
+                "src": "327:8:4"
+              },
+              {
+                "id": 1543,
+                "name": "NotAccepted",
+                "nodeType": "EnumValue",
+                "src": "337:11:4"
+              }
+            ],
+            "name": "ControlStatus",
+            "nodeType": "EnumDefinition",
+            "src": "307:42:4"
+          },
+          {
+            "canonicalName": "Enums.ControlRole",
+            "id": 1548,
+            "members": [
+              {
+                "id": 1545,
+                "name": "Inspector",
+                "nodeType": "EnumValue",
+                "src": "457:9:4"
+              },
+              {
+                "id": 1546,
+                "name": "QualityControl",
+                "nodeType": "EnumValue",
+                "src": "468:14:4"
+              },
+              {
+                "id": 1547,
+                "name": "Risk",
+                "nodeType": "EnumValue",
+                "src": "484:4:4"
+              }
+            ],
+            "name": "ControlRole",
+            "nodeType": "EnumDefinition",
+            "src": "439:50:4"
+          },
+          {
+            "canonicalName": "Enums.SupplyChainRole",
+            "id": 1552,
+            "members": [
+              {
+                "id": 1549,
+                "name": "Delivery",
+                "nodeType": "EnumValue",
+                "src": "598:8:4"
+              },
+              {
+                "id": 1550,
+                "name": "Producer",
+                "nodeType": "EnumValue",
+                "src": "608:8:4"
+              },
+              {
+                "id": 1551,
+                "name": "External",
+                "nodeType": "EnumValue",
+                "src": "618:8:4"
+              }
+            ],
+            "name": "SupplyChainRole",
+            "nodeType": "EnumDefinition",
+            "src": "576:51:4"
+          }
+        ],
+        "scope": 1554,
+        "src": "98:531:4"
+      }
+    ],
+    "src": "32:598:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-05-13T13:46:06.269Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

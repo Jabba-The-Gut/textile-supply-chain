@@ -29,7 +29,7 @@ contract ChainOfCustodyToken is ERC721, Ownable {
         string memory _symbol,
         address _registry,
         address _rbac
-    ) ERC721("ChainOfCustodyToken", "COCT") {
+    ) ERC721("SupplyChainToken", "SCT") {
         registry = LKGRegistry(_registry);
         rbac = RBAC(_rbac);
         name = _name;

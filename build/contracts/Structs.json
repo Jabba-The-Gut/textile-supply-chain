@@ -1,0 +1,1387 @@
+{
+  "contractName": "Structs",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Structs.sol\":\"Structs\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Enums.sol\":{\"keccak256\":\"0xa377de2908959a9be65421fafae189ea62c621caf19bbc014fb9ff58b20435da\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a8b84d9bd08f9a496df03033a937b03b4c005e81141f7a0edf88db65c35f25ef\",\"dweb:/ipfs/QmNcYFTkXvJyBqZAYriDMbicNxdwUkcBpEXbiQAeXkXPDm\"]},\"/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Structs.sol\":{\"keccak256\":\"0xc6ede786a6a84a7fabc9ff558cd3edc4618acedb13c39239af2beaa3c11724a8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4b03bbf961ffa658fcb8053d0f6d536ae3871f5b624130b51bbe9ecadd374d0c\",\"dweb:/ipfs/QmQvoNx6wHF6T4yajFQErtut9cU9uXRYqCLHqRvdEnrHpZ\"]}},\"version\":1}",
+  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220449412fa0ca723b1788a0c6e9a75d813dea5d54b45228796b3f6bbdfe5be3deb64736f6c63430008000033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220449412fa0ca723b1788a0c6e9a75d813dea5d54b45228796b3f6bbdfe5be3deb64736f6c63430008000033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "89:1358:8:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "89:1358:8:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.9.0;\n\nimport \"./Enums.sol\";\n\nlibrary Structs {\n    /**\n     * struct that represents an entity that can make controls\n     */\n    struct ControlEntity {\n        Enums.ControlRole role;\n        string description;\n        bool gseStatus;\n        uint256 numberOfControls;\n    }\n\n    /**\n     * struct that represents an entity in the supply chain\n     */\n    struct SupplyChainEntity {\n        Enums.SupplyChainRole role;\n        string tier;\n        bool gseStatus;\n        uint256[] controls;\n        uint256[] transactions;\n    }\n\n    /**\n     * struct that represents a control to check if the\n     * circumstances of the GSE are met or not\n     */\n    struct GSEControl {\n        uint256 controlId;\n        uint256 timeOfControl;\n        Enums.ControlStatus status;\n        address controlled;\n        address controller;\n    }\n\n    /**\n     * struct that represents the findings in a GSE-control\n     */\n    struct GSEControlDetails {\n        bool gseOK;\n        string[] findings;\n    }\n\n    /**\n     * struct that represents a transaction of a NFT with one of the parties\n     * (either sender or receiver) not accepting or acknowledging the GSE\n     */\n    struct NonGSETransaction {\n        uint256 time;\n        uint256 tokenId;\n    }\n\n    /**\n     * struct that represents the metadata belonging to a NFT\n     */\n    struct Metadata {\n        uint256[] sourceTokenIds;\n    }\n}\n",
+  "sourcePath": "/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Structs.sol",
+  "ast": {
+    "absolutePath": "/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Structs.sol",
+    "exportedSymbols": {
+      "Enums": [
+        1553
+      ],
+      "Structs": [
+        2478
+      ]
+    },
+    "id": 2479,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2425,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:8"
+      },
+      {
+        "absolutePath": "/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Enums.sol",
+        "file": "./Enums.sol",
+        "id": 2426,
+        "nodeType": "ImportDirective",
+        "scope": 2479,
+        "sourceUnit": 1554,
+        "src": "66:21:8",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "id": 2478,
+        "linearizedBaseContracts": [
+          2478
+        ],
+        "name": "Structs",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Structs.ControlEntity",
+            "id": 2436,
+            "members": [
+              {
+                "constant": false,
+                "id": 2429,
+                "mutability": "mutable",
+                "name": "role",
+                "nodeType": "VariableDeclaration",
+                "scope": 2436,
+                "src": "221:22:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_ControlRole_$1548",
+                  "typeString": "enum Enums.ControlRole"
+                },
+                "typeName": {
+                  "id": 2428,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 2427,
+                    "name": "Enums.ControlRole",
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 1548,
+                    "src": "221:17:8"
+                  },
+                  "referencedDeclaration": 1548,
+                  "src": "221:17:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_ControlRole_$1548",
+                    "typeString": "enum Enums.ControlRole"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2431,
+                "mutability": "mutable",
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 2436,
+                "src": "253:18:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2430,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "253:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2433,
+                "mutability": "mutable",
+                "name": "gseStatus",
+                "nodeType": "VariableDeclaration",
+                "scope": 2436,
+                "src": "281:14:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 2432,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "281:4:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2435,
+                "mutability": "mutable",
+                "name": "numberOfControls",
+                "nodeType": "VariableDeclaration",
+                "scope": 2436,
+                "src": "305:24:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2434,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "305:7:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "ControlEntity",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "190:146:8",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.SupplyChainEntity",
+            "id": 2450,
+            "members": [
+              {
+                "constant": false,
+                "id": 2439,
+                "mutability": "mutable",
+                "name": "role",
+                "nodeType": "VariableDeclaration",
+                "scope": 2450,
+                "src": "453:26:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_SupplyChainRole_$1552",
+                  "typeString": "enum Enums.SupplyChainRole"
+                },
+                "typeName": {
+                  "id": 2438,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 2437,
+                    "name": "Enums.SupplyChainRole",
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 1552,
+                    "src": "453:21:8"
+                  },
+                  "referencedDeclaration": 1552,
+                  "src": "453:21:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_SupplyChainRole_$1552",
+                    "typeString": "enum Enums.SupplyChainRole"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2441,
+                "mutability": "mutable",
+                "name": "tier",
+                "nodeType": "VariableDeclaration",
+                "scope": 2450,
+                "src": "489:11:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2440,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "489:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2443,
+                "mutability": "mutable",
+                "name": "gseStatus",
+                "nodeType": "VariableDeclaration",
+                "scope": 2450,
+                "src": "510:14:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 2442,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "510:4:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2446,
+                "mutability": "mutable",
+                "name": "controls",
+                "nodeType": "VariableDeclaration",
+                "scope": 2450,
+                "src": "534:18:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2444,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "534:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 2445,
+                  "nodeType": "ArrayTypeName",
+                  "src": "534:9:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2449,
+                "mutability": "mutable",
+                "name": "transactions",
+                "nodeType": "VariableDeclaration",
+                "scope": 2450,
+                "src": "562:22:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2447,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "562:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 2448,
+                  "nodeType": "ArrayTypeName",
+                  "src": "562:9:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "SupplyChainEntity",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "418:173:8",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.GSEControl",
+            "id": 2462,
+            "members": [
+              {
+                "constant": false,
+                "id": 2452,
+                "mutability": "mutable",
+                "name": "controlId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2462,
+                "src": "744:17:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2451,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "744:7:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2454,
+                "mutability": "mutable",
+                "name": "timeOfControl",
+                "nodeType": "VariableDeclaration",
+                "scope": 2462,
+                "src": "771:21:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2453,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "771:7:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2457,
+                "mutability": "mutable",
+                "name": "status",
+                "nodeType": "VariableDeclaration",
+                "scope": 2462,
+                "src": "802:26:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_ControlStatus_$1544",
+                  "typeString": "enum Enums.ControlStatus"
+                },
+                "typeName": {
+                  "id": 2456,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 2455,
+                    "name": "Enums.ControlStatus",
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 1544,
+                    "src": "802:19:8"
+                  },
+                  "referencedDeclaration": 1544,
+                  "src": "802:19:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_ControlStatus_$1544",
+                    "typeString": "enum Enums.ControlStatus"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2459,
+                "mutability": "mutable",
+                "name": "controlled",
+                "nodeType": "VariableDeclaration",
+                "scope": 2462,
+                "src": "838:18:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2458,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "838:7:8",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2461,
+                "mutability": "mutable",
+                "name": "controller",
+                "nodeType": "VariableDeclaration",
+                "scope": 2462,
+                "src": "866:18:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2460,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "866:7:8",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "GSEControl",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "716:175:8",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.GSEControlDetails",
+            "id": 2468,
+            "members": [
+              {
+                "constant": false,
+                "id": 2464,
+                "mutability": "mutable",
+                "name": "gseOK",
+                "nodeType": "VariableDeclaration",
+                "scope": 2468,
+                "src": "1008:10:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 2463,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1008:4:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2467,
+                "mutability": "mutable",
+                "name": "findings",
+                "nodeType": "VariableDeclaration",
+                "scope": 2468,
+                "src": "1028:17:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                  "typeString": "string[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2465,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1028:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "id": 2466,
+                  "nodeType": "ArrayTypeName",
+                  "src": "1028:8:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                    "typeString": "string[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "GSEControlDetails",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "973:79:8",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.NonGSETransaction",
+            "id": 2473,
+            "members": [
+              {
+                "constant": false,
+                "id": 2470,
+                "mutability": "mutable",
+                "name": "time",
+                "nodeType": "VariableDeclaration",
+                "scope": 2473,
+                "src": "1260:12:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2469,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1260:7:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2472,
+                "mutability": "mutable",
+                "name": "tokenId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2473,
+                "src": "1282:15:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2471,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1282:7:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "NonGSETransaction",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "1225:79:8",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.Metadata",
+            "id": 2477,
+            "members": [
+              {
+                "constant": false,
+                "id": 2476,
+                "mutability": "mutable",
+                "name": "sourceTokenIds",
+                "nodeType": "VariableDeclaration",
+                "scope": 2477,
+                "src": "1414:24:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2474,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1414:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 2475,
+                  "nodeType": "ArrayTypeName",
+                  "src": "1414:9:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Metadata",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "1388:57:8",
+            "visibility": "public"
+          }
+        ],
+        "scope": 2479,
+        "src": "89:1358:8"
+      }
+    ],
+    "src": "32:1416:8"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Structs.sol",
+    "exportedSymbols": {
+      "Enums": [
+        1553
+      ],
+      "Structs": [
+        2478
+      ]
+    },
+    "id": 2479,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2425,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:8"
+      },
+      {
+        "absolutePath": "/Users/jabbathegut/repositories/ba_sources/textile-supply-chain/contracts/Enums.sol",
+        "file": "./Enums.sol",
+        "id": 2426,
+        "nodeType": "ImportDirective",
+        "scope": 2479,
+        "sourceUnit": 1554,
+        "src": "66:21:8",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "id": 2478,
+        "linearizedBaseContracts": [
+          2478
+        ],
+        "name": "Structs",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Structs.ControlEntity",
+            "id": 2436,
+            "members": [
+              {
+                "constant": false,
+                "id": 2429,
+                "mutability": "mutable",
+                "name": "role",
+                "nodeType": "VariableDeclaration",
+                "scope": 2436,
+                "src": "221:22:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_ControlRole_$1548",
+                  "typeString": "enum Enums.ControlRole"
+                },
+                "typeName": {
+                  "id": 2428,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 2427,
+                    "name": "Enums.ControlRole",
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 1548,
+                    "src": "221:17:8"
+                  },
+                  "referencedDeclaration": 1548,
+                  "src": "221:17:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_ControlRole_$1548",
+                    "typeString": "enum Enums.ControlRole"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2431,
+                "mutability": "mutable",
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 2436,
+                "src": "253:18:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2430,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "253:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2433,
+                "mutability": "mutable",
+                "name": "gseStatus",
+                "nodeType": "VariableDeclaration",
+                "scope": 2436,
+                "src": "281:14:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 2432,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "281:4:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2435,
+                "mutability": "mutable",
+                "name": "numberOfControls",
+                "nodeType": "VariableDeclaration",
+                "scope": 2436,
+                "src": "305:24:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2434,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "305:7:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "ControlEntity",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "190:146:8",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.SupplyChainEntity",
+            "id": 2450,
+            "members": [
+              {
+                "constant": false,
+                "id": 2439,
+                "mutability": "mutable",
+                "name": "role",
+                "nodeType": "VariableDeclaration",
+                "scope": 2450,
+                "src": "453:26:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_SupplyChainRole_$1552",
+                  "typeString": "enum Enums.SupplyChainRole"
+                },
+                "typeName": {
+                  "id": 2438,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 2437,
+                    "name": "Enums.SupplyChainRole",
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 1552,
+                    "src": "453:21:8"
+                  },
+                  "referencedDeclaration": 1552,
+                  "src": "453:21:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_SupplyChainRole_$1552",
+                    "typeString": "enum Enums.SupplyChainRole"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2441,
+                "mutability": "mutable",
+                "name": "tier",
+                "nodeType": "VariableDeclaration",
+                "scope": 2450,
+                "src": "489:11:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2440,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "489:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2443,
+                "mutability": "mutable",
+                "name": "gseStatus",
+                "nodeType": "VariableDeclaration",
+                "scope": 2450,
+                "src": "510:14:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 2442,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "510:4:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2446,
+                "mutability": "mutable",
+                "name": "controls",
+                "nodeType": "VariableDeclaration",
+                "scope": 2450,
+                "src": "534:18:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2444,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "534:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 2445,
+                  "nodeType": "ArrayTypeName",
+                  "src": "534:9:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2449,
+                "mutability": "mutable",
+                "name": "transactions",
+                "nodeType": "VariableDeclaration",
+                "scope": 2450,
+                "src": "562:22:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2447,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "562:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 2448,
+                  "nodeType": "ArrayTypeName",
+                  "src": "562:9:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "SupplyChainEntity",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "418:173:8",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.GSEControl",
+            "id": 2462,
+            "members": [
+              {
+                "constant": false,
+                "id": 2452,
+                "mutability": "mutable",
+                "name": "controlId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2462,
+                "src": "744:17:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2451,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "744:7:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2454,
+                "mutability": "mutable",
+                "name": "timeOfControl",
+                "nodeType": "VariableDeclaration",
+                "scope": 2462,
+                "src": "771:21:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2453,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "771:7:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2457,
+                "mutability": "mutable",
+                "name": "status",
+                "nodeType": "VariableDeclaration",
+                "scope": 2462,
+                "src": "802:26:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_ControlStatus_$1544",
+                  "typeString": "enum Enums.ControlStatus"
+                },
+                "typeName": {
+                  "id": 2456,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 2455,
+                    "name": "Enums.ControlStatus",
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 1544,
+                    "src": "802:19:8"
+                  },
+                  "referencedDeclaration": 1544,
+                  "src": "802:19:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_ControlStatus_$1544",
+                    "typeString": "enum Enums.ControlStatus"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2459,
+                "mutability": "mutable",
+                "name": "controlled",
+                "nodeType": "VariableDeclaration",
+                "scope": 2462,
+                "src": "838:18:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2458,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "838:7:8",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2461,
+                "mutability": "mutable",
+                "name": "controller",
+                "nodeType": "VariableDeclaration",
+                "scope": 2462,
+                "src": "866:18:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2460,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "866:7:8",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "GSEControl",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "716:175:8",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.GSEControlDetails",
+            "id": 2468,
+            "members": [
+              {
+                "constant": false,
+                "id": 2464,
+                "mutability": "mutable",
+                "name": "gseOK",
+                "nodeType": "VariableDeclaration",
+                "scope": 2468,
+                "src": "1008:10:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 2463,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1008:4:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2467,
+                "mutability": "mutable",
+                "name": "findings",
+                "nodeType": "VariableDeclaration",
+                "scope": 2468,
+                "src": "1028:17:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                  "typeString": "string[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2465,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1028:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "id": 2466,
+                  "nodeType": "ArrayTypeName",
+                  "src": "1028:8:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                    "typeString": "string[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "GSEControlDetails",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "973:79:8",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.NonGSETransaction",
+            "id": 2473,
+            "members": [
+              {
+                "constant": false,
+                "id": 2470,
+                "mutability": "mutable",
+                "name": "time",
+                "nodeType": "VariableDeclaration",
+                "scope": 2473,
+                "src": "1260:12:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2469,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1260:7:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2472,
+                "mutability": "mutable",
+                "name": "tokenId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2473,
+                "src": "1282:15:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2471,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1282:7:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "NonGSETransaction",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "1225:79:8",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.Metadata",
+            "id": 2477,
+            "members": [
+              {
+                "constant": false,
+                "id": 2476,
+                "mutability": "mutable",
+                "name": "sourceTokenIds",
+                "nodeType": "VariableDeclaration",
+                "scope": 2477,
+                "src": "1414:24:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2474,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1414:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 2475,
+                  "nodeType": "ArrayTypeName",
+                  "src": "1414:9:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Metadata",
+            "nodeType": "StructDefinition",
+            "scope": 2478,
+            "src": "1388:57:8",
+            "visibility": "public"
+          }
+        ],
+        "scope": 2479,
+        "src": "89:1358:8"
+      }
+    ],
+    "src": "32:1416:8"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-05-13T13:46:06.321Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
