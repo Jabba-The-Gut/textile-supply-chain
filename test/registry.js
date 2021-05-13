@@ -86,6 +86,14 @@ contract("Registry Test Suite", async accounts => {
         await expectRevert(registry.getSupplyChainEntity(entity, {from: entity}), "Entity does not exist");
     });
 
+    it("Try to add an address to the registry (supply chain entity) that does not hold the supply chain entity role", async () => {
+        await expectRevert(registry.addSupplyChainEntity(chance_instance.pickone(normal_addresses), {role: 1, tier: "tier 0", gseStatus: 0, controls: [], transactions:[]}, {from:rbac_admin}), "Address is not a supply chain entity");
+    });
+
+    it("Try to add an address to the registry (control entity) that does not hold the control entity role", async () => {
+        await expectRevert(registry.addControlEntity(chance_instance.pickone(normal_addresses), {role: 1, description: "test", gseStatus: 0, numberOfControls: 0}, {from:rbac_admin}), "Address is not a control entity");
+    });
+
     it("Add a control entity, get it and then remove it again", async () => {
         let entity = chance_instance.pickone(control_addresses);
 

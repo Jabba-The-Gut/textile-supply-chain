@@ -63,7 +63,7 @@ contract LKGRegistry is Context {
         Structs.SupplyChainEntity memory _entity
     ) public onlyChainAdmin {
         require(!entitiesIndex[_address], "Entity already existing");
-
+        require(rbac.hasRole(_address, rbac.SUPPLY_CHAIN_ENTITY_ROLE()), "Address is not a supply chain entity");
         entitiesIndex[_address] = true;
         supplyChainEntities[_address] = _entity;
     }
@@ -103,6 +103,7 @@ contract LKGRegistry is Context {
         Structs.ControlEntity memory _entity
     ) public onlyChainAdmin {
         require(!controlEntitiesIndex[_address], "Entity already exists");
+        require(rbac.hasRole(_address, rbac.SUPPLY_CHAIN_CONTROL_ENTITY_ROLE()), "Address is not a control entity");
         controlEntitiesIndex[_address] = true;
         controlEntities[_address] = _entity;
     }
