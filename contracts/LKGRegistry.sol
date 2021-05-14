@@ -11,7 +11,6 @@ import "openzeppelin-solidity/contracts/utils/Counters.sol";
  */
 contract LKGRegistry is Context {
     using Counters for Counters.Counter;
-    Counters.Counter private controlCounter;
     Counters.Counter private nonGseCounter;
     RBAC private rbac;
     mapping(address => bool) private entitiesIndex;
@@ -144,13 +143,13 @@ contract LKGRegistry is Context {
     {
         require(entitiesIndex[_entity], "Entity does not exist");
 
-        controlCounter.increment();
+        uint256 controlId = _control.controlId;
         // update control index
-        controlIndex[controlCounter.current()] = true;
+        controlIndex[controlId] = true;
         // add control struct to the mapping
-        controls[controlCounter.current()] = _control;
+        controls[controlId] = _control;
         // add control id to the supply chain entity
-        supplyChainEntities[_entity].controls.push(controlCounter.current());
+        supplyChainEntities[_entity].controls.push(controlId);
         // increment number of controls for controller
         controlEntities[_control.controller].numberOfControls += 1;
     }
