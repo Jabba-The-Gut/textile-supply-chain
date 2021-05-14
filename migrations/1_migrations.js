@@ -53,6 +53,19 @@ module.exports = async function (deployer, network, accounts) {
     
     await rbac_contract.addMember(token_contract.address, "ADMIN", {from:rbac_root_address});
     await rbac_contract.addMember(control_contract.address, "ADMIN", {from:rbac_root_address});
+
+    // add the needed entities to the registry
+    for (let index = 0; index < producers.length; index++) {
+      await registry_contract.addSupplyChainEntity(producers[index], {role: 1, tier:"Tier " + (producers.length - index), gseStatus: 0, controls: [], transactions: []}, {from: supply_chain_admin_address});
+    }
+
+    for (let index = 0; index < controllers.length; index++) {
+      await registry_contract.addControlEntity(controllers[index], {role: index, description: "Controlling Entity", gseStatus: 0, numberOfControls:0}, {from: supply_chain_admin_address});
+    }
+
+    for (let index = 0; index < supply_chain_entities.length; index++) {
+      await registry_contract.addSupplyChainEntity(supply_chain_entities[index], {role: 0, tier:"Delivery instance " , gseStatus: 0, controls: [], transactions: []}, {from: supply_chain_admin_address});
+    }
   }
 }
 
