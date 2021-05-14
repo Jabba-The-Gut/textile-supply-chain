@@ -23,6 +23,7 @@ contract ChainOfCustodyToken is ERC721, Ownable {
     mapping(uint256 => bool) activeIndex;
 
     event NonGSETransaction(Structs.NonGSETransaction);
+    event TokenTransfer(address, address, uint256);
 
     constructor(
         string memory _name,
@@ -72,6 +73,8 @@ contract ChainOfCustodyToken is ERC721, Ownable {
             activeIndex[inputTokens[i]] = false;
         }
 
+        emit TokenTransfer(address(0), _owner, tokenID);
+
         return tokenID;
     }
 
@@ -101,6 +104,8 @@ contract ChainOfCustodyToken is ERC721, Ownable {
         );
 
         _transfer(_from, _to, _tokenId);
+
+        emit TokenTransfer(_from, _to, _tokenId);
     }
 
     /**

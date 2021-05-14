@@ -105,13 +105,13 @@ contract("NF-Token Test Suite", async accounts => {
 
         // mint new token
         let tokenID = await cotton_token.mintToken(future_owner, {sourceTokenIds: []}, {from: owner_of_token_contract});
-        
+        await expectEvent(tokenID, 'TokenTransfer');
         //check that the token was created correctly
         assert.strictEqual(await cotton_token.ownerOf(1), future_owner, {from: owner_of_token_contract});
         
         // transfer token
         let transfer = await cotton_token.transferToken(future_owner, future_future_owner, 1, {from: future_owner});
-        await expectEvent(transfer, 'Transfer');
+        await expectEvent(transfer, 'TokenTransfer');
 
         // check that the token was transferred correctly
         assert.strictEqual(await cotton_token.ownerOf(1), future_future_owner, {from: future_future_owner});
@@ -132,14 +132,15 @@ contract("NF-Token Test Suite", async accounts => {
         await registry.acknowledgeGSE({from: future_owner});
 
         // mint new token
-        await cotton_token.mintToken(future_owner, {sourceTokenIds: []}, {from: owner_of_token_contract});
-        
+        let tokenID = await cotton_token.mintToken(future_owner, {sourceTokenIds: []}, {from: owner_of_token_contract});
+        await expectEvent(tokenID, 'TokenTransfer');
+
         //check that the token was created correctly
         assert.strictEqual(await cotton_token.ownerOf(2), future_owner, {from: owner_of_token_contract});
         
         // transfer token
         let transfer = await cotton_token.transferToken(future_owner, future_future_owner, 2, {from: future_owner});
-        await expectEvent(transfer, 'Transfer');
+        await expectEvent(transfer, 'TokenTransfer');
         await expectEvent(transfer, 'NonGSETransaction');
 
         // check that the token was transferred correctly
@@ -158,14 +159,15 @@ contract("NF-Token Test Suite", async accounts => {
         let future_future_owner = supply_chain_addresses[2];
 
         // mint new token
-        await cotton_token.mintToken(future_owner, {sourceTokenIds: [1, 2]}, {from: owner_of_token_contract});
-        
+        let tokenID = await cotton_token.mintToken(future_owner, {sourceTokenIds: [1, 2]}, {from: owner_of_token_contract});
+        await expectEvent(tokenID, 'TokenTransfer');
+
         //check that the token was created correctly
         assert.strictEqual(await cotton_token.ownerOf(3), future_owner, {from: owner_of_token_contract});
         
         // transfer token
         let transfer = await cotton_token.transferToken(future_owner, future_future_owner, 3, {from: future_owner});
-        await expectEvent(transfer, 'Transfer');
+        await expectEvent(transfer, 'TokenTransfer');
         await expectEvent(transfer, 'NonGSETransaction');
 
         // check that the token was transferred correctly
