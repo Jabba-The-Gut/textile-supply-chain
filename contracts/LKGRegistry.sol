@@ -11,6 +11,7 @@ import "openzeppelin-solidity/contracts/utils/Counters.sol";
  */
 contract LKGRegistry is Context {
     using Counters for Counters.Counter;
+    Counters.Counter private nonGSECounter;
     RBAC private rbac;
     mapping(address => bool) private entitiesIndex;
     mapping(address => Structs.SupplyChainEntity) private supplyChainEntities;
@@ -171,7 +172,7 @@ contract LKGRegistry is Context {
     /**
      * @notice Get a list of control ids that were made for a supply chain entity
      * @param _entity The entity to get the control ids for
-     *@return Array of control ids (same as tokenIds used in that transaction)
+     *@return Array of control ids
      */
     function getControls(address _entity)
         public
@@ -194,28 +195,30 @@ contract LKGRegistry is Context {
     ) public onlyChainAdmin {
         require(entitiesIndex[_entity], "Entity does not exits");
 
-        uint256 tokenId = _transaction.tokenId;
+        nonGSECounter.increment();
+
+        uint256 counter = nonGSECounter.current();
         // update transaction index
-        nonGseIndex[tokenId] = true;
+        nonGseIndex[counter] = true;
         // add transaction struct to the mapping
-        transactions[tokenId] = _transaction;
+        transactions[counter] = _transaction;
         // add transaction id to the supply chain entity
-        supplyChainEntities[_entity].transactions.push(tokenId);
+        supplyChainEntities[_entity].transactions.push(counter);
     }
 
     /**
      * @notice Get a non gse transaction that was made
-     * @param _tokenId of the token in the transaction
-     * @return transaction with the given token id
+     * @param _transactionId id of the transaction
+     * @return transaction 
      */
-    function getNonGSETransaction(uint256 _tokenId)
+    function getNonGSETransaction(uint256 _transactionId)
         public
         view
         onlyChainMember
         returns (Structs.NonGSETransaction memory)
     {
-        require(nonGseIndex[_tokenId], "Transaction does not exist");
-        return transactions[_tokenId];
+        require(nonGseIndex[_transactionId], "Transaction does not exist");
+        return transactions[_transactionId];
     }
 
     /**

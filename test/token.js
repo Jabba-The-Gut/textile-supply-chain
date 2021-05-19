@@ -188,6 +188,13 @@ contract("NF-Token Test Suite", async accounts => {
         // check that tokens with ID 241 and 456 are inactive and cannot be transferred anymore
         await expectRevert(cotton_token.transferToken(future_future_owner, future_owner, 2, {from: future_owner}), "Token must be active to be transferrable");
         await expectRevert(cotton_token.transferToken(future_future_owner, future_owner, 1, {from: future_owner}), "Token must be active to be transferrable")
+    
+        // check that NonGSETransaction is linked correctly
+        let transactions = await registry.getNonGSETransactions(future_future_owner);
+        let transaction_one = await registry.getNonGSETransaction(transactions[0]);
+        let transaction_two = await registry.getNonGSETransaction(transactions[1]);
+        assert.equal(transaction_one[1], 2);
+        assert.equal(transaction_two[1], 3);
     });
 
 });
