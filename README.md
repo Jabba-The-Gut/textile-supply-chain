@@ -20,7 +20,7 @@ The following screenshot shows an example flow with multiple nodes defined in th
 ![Bildschirmfoto 2021-05-20 um 13 55 04](https://user-images.githubusercontent.com/29917858/118974333-fdc6b300-b972-11eb-9ece-862d407d08a9.png)
 
 ### Accounts & Roles
-The blockchain has 20 associated accounts with predefined roles. The following table displays the addresses and the roles: 
+The blockchain has 20 associated accounts with predefined roles. The following table displays the addresses, the roles and the meaning behind the accounts: 
 
 |Address  |Role   	| Represents |
 |---	|---	| ---|
