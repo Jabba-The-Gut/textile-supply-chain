@@ -76,15 +76,15 @@ npm install [path to the location of node-red-contrib-ethereum sources]
 ### Ganache
 Now you need to set up a new ganache workspace that hosts your local ethereum blockchain.
 - Open Ganache and select "New Workspace"
-- In the "Workspace"-Tab choose a name and then click on the **Add Project** button to link a new truffle project. In the dialogue, choose the ```truffle-config.js``` from this repository. By adding this truffle project, you are able to see information in ganache such as smart contract address later on
+- In the "Workspace"-Tab choose a name and then click on the **Add Project** button to link a new truffle project. In the dialogue, choose the ```truffle-config.js``` from this repository
+> By adding this truffle project, you are able to see information in ganache such as smart contract addresses later on
 - In the "Server"-Tab make sure that you set the **Network ID** to ```4444```. Otherwise Node-RED will not be able to connect to your blockchain
 - In the "Accounts & Keys"-Tab set the number of total accounts to **20** and replace the choosen Mnemonic with the following:
 ```
 neither thank differ pigeon link arctic nephew excess ahead present because rely
-```
-This Mnemonic is used by ganache to create the addresses. This makes sure that you have the same addresses as me
+``` 
+> This Mnemonic is used by ganache to create the addresses. This makes sure that you have the same addresses as me
 - Click on "Save Workspace"
-Note: If you use Node-RED, then the created workspace must be the active one
 
 ### Truffle
 Now you need to deploy the smart contracts to ganache, so they are available. The file ```migrations.js```contains the needed logic to deploy the contracts and also set's up the needed roles for the different addresses.
