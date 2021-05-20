@@ -85,3 +85,22 @@ This Mnemonic is used by ganache to create the addresses. This makes sure that y
 Note: If you use Node-RED, then the created workspace must be the active one
 
 ### Truffle
+Now you need to deploy the smart contracts to ganache, so they are available. The file ```migrations.js```contains the needed logic to deploy the contracts and also set's up the needed roles for the different addresses.
+- Run the following commands from the directory that contains the ```truffle-config.js```from this repository:
+```bash
+truffle compile --all
+```
+```bash
+truffle migrate --network ganache
+```
+The migrate command should display something like this:
+![Bildschirmfoto 2021-05-20 um 16 01 33](https://user-images.githubusercontent.com/29917858/118992145-a92c3380-b984-11eb-9d7e-38bc5d83736e.png)
+- Depending on your system, this takes some minutes to be handled by ganache. It can occur that ganache becomes unresponsive after those two commands
+- Now check the contracts tab in ganache and make sure that there are at least 5 deployed contracts: **ChainOfCustodyToken, Control, LKGRegistry, Migrations, RBAC**
+
+### Import flows for Smart Contracts to Node-RED
+Now you need to import the flows for the Smart Contracts to your Node-RED installation:
+- In Node-RED go to "Import" and import the ```flows.json```file from this repository. It's inside the flows folder
+- Restart Node-RED and you're done
+
+## Using the prototype
