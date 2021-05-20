@@ -67,7 +67,7 @@ node-red
 ```
 - Then run the following command from inside the .node-red directory: 
 ```bash
-npm install [path to the location of node-red-contrib-ethereum
+npm install [path to the location of node-red-contrib-ethereum]
 ```
 - Now start Node-RED and use to URL from the start command (usually http://127.0.0.1:1880) to check if the following nodes are present:
 
