@@ -53,6 +53,7 @@ After you installed the prototype, you can interact with it in the following way
 
 ## Installation
 ### Prequisites
+(Make sure that you have installed Node.js)
 - First, install truffle from https://www.trufflesuite.com/truffle
 - Then install ganache from https://www.trufflesuite.com/ganache
 - Then install Node-RED locally as described in https://nodered.org/docs/getting-started/local
