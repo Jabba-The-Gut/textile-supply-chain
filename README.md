@@ -5,7 +5,7 @@
 
 This repository contains the sources of my bachelor thesis where I developed a etherum based blockchain prototype to enhance the chain of custody and to make it possible for an exemplary organization to check their supply chain against the rules of the ["Lieferkettengesetz"](https://lieferkettengesetz.de/).
 
-The supply chain of the exemplary organization consists of 4 tiers and multiple suppliers. Every entity has an associated wallet and can interact with the blockchain prototype to simulate a supply chain. Physical goods are represented using a digital twin that moves along the suppl chain as the phyiscal good does. This digital twin is realised using a [ERC-721 token](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/). The following graphic should give an overview of the situation:
+The supply chain of the exemplary organization consists of 4 tiers and multiple suppliers. Every entity has an associated wallet and can interact with the blockchain prototype to simulate a supply chain. Physical goods are represented using a digital twin that moves along the supply chain as the phyiscal good does. This digital twin is realised using a [ERC-721 token](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/). The following graphic should give an overview of the situation:
 
 ![Bildschirmfoto 2021-05-20 um 13 49 10](https://user-images.githubusercontent.com/29917858/118973629-29956900-b972-11eb-84f4-8ee6be03c8e1.png)
 
