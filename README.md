@@ -50,5 +50,38 @@ The Node-RED project contains a flow for every contract. Every flow has a descri
 
 ![Bildschirmfoto 2021-05-20 um 14 21 01](https://user-images.githubusercontent.com/29917858/118977587-9ca0de80-b976-11eb-8dd2-b946dddcb316.png)
 
+## Installation
+### Prequisites
+- First, install truffle from https://www.trufflesuite.com/truffle
+- Then install ganache from https://www.trufflesuite.com/ganache
+- Then install Node-RED locally as described in https://nodered.org/docs/getting-started/local
+- Then make sure that you have the sources from this repsoitory and the package ["node-red-contrib-ethereum"](https://github.com/timweing/node-red-contrib-ethereum) available locally 
 
+### Node-RED
+The nodes to interact with an ethererum blockchain are in the "node-red-contrib-ethereum" package and need to be added to your Node-RED installation. For this:
+- Locate the .node-red directory on your system. It is usually located in your user directory. If not, then make sure that you start Node-RED before checking again. Node-RED can be started with the following command:
+```bash
+node-red
+```
+- Then run the following command from inside the .node-red directory: 
+```bash
+npm install [path to the location of node-red-contrib-ethereum
+```
+- Now start Node-RED and use to URL from the start command (usually http://127.0.0.1:1880) to check if the following nodes are present:
 
+![Bildschirmfoto 2021-05-20 um 15 40 52](https://user-images.githubusercontent.com/29917858/118988763-c6133780-b981-11eb-82f0-4755924f077e.png)
+
+### Ganache
+Now you need to set up a new ganache workspace that hosts your local ethereum blockchain.
+- Open Ganache and select "New Workspace"
+- In the "Workspace"-Tab choose a name and then click on the **Add Project** button to link a new truffle project. In the dialogue, choose the ```truffle-config.js``` from this repository. By adding this truffle project, you are able to see information in ganache such as smart contract address later on
+- In the "Server"-Tab make sure that you set the **Network ID** to ```4444```. Otherwise Node-RED will not be able to connect to your blockchain
+- In the "Accounts & Keys"-Tab set the number of total accounts to **20** and replace the choosen Mnemonic with the following:
+```
+neither thank differ pigeon link arctic nephew excess ahead present because rely
+```
+This Mnemonic is used by ganache to create the addresses. This makes sure that you have the same addresses as me
+- Click on "Save Workspace"
+Note: If you use Node-RED, then the created workspace must be the active one
+
+### Truffle
