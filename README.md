@@ -50,6 +50,12 @@ The Node-RED project contains a flow for every contract. Every flow has a descri
 
 ![Bildschirmfoto 2021-05-20 um 14 21 01](https://user-images.githubusercontent.com/29917858/118977587-9ca0de80-b976-11eb-8dd2-b946dddcb316.png)
 
+### Using the prototype
+After you installed the prototype, you can interact with it in the following way using Node-RED:
+- Start a control for an entity by using the **Control** flow. Make sure that the controller is one of the accounts with the Control role. 
+- Simulate the producing and processing of goods with their digital twin by minting and transferring tokens in the **Chain Of Custody Token** flow. It must be noted that at the beginning, all accounts have a **GSE status** of false. This means that the accounts have not accepted the rules from the "Lieferkettengesetz" and every transaction with tokens made by these accounts adds a **NOnGSETransaction** entry to the corresponding accounts. To set the **GSE status** to true, use the **LKG Registry** flow and execute the **Acknowledge "Grundsatzerklärung"** subflow.
+- Query information about entities, controls and non gse transactons using the **LKG Registry** flow 
+
 ## Installation
 ### Prequisites
 - First, install truffle from https://www.trufflesuite.com/truffle
@@ -102,5 +108,3 @@ The migrate command should display something like this:
 Now you need to import the flows for the Smart Contracts to your Node-RED installation:
 - In Node-RED go to "Import" and import the ```flows.json```file from this repository. It's inside the flows folder
 - Restart Node-RED and you're done
-
-## Using the prototype
