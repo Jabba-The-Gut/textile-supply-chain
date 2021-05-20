@@ -22,17 +22,17 @@ The following screenshot shows an example flow with multiple nodes defined in th
 ### Accounts & Roles
 The blockchain has 20 associated accounts with predefined roles. The following table displays the addresses and the roles: 
 
-|Address  |Role   	|
-|---	|---	|
-| 0x443007D52e3E285E54FD2F470aaDFFCF7d76A195  	|Admin, Minter   	|
-| 0x90c9425330fC35D63533be3a5B15d95771DedE20  	|Admin   	|
-| 0xDa38E26ef4d89617A1f26179A78813869F46a5DB  	|Minter, Supply Chain Entity   	|
-| 0xF18Cd3C0Fc23dfB6A17539352dAB870AfD461904  	|Minter, Supply Chain Entity   	|
-| 0x0942269301f2FD774d794D6aA7865c376511FB3E  	|Minter, Supply Chain Entity   	|
-| 0x860D9b0868f498a7A107430929466246Dec92Efd  	|Minter, Supply Chain Entity   	|
-| 0xC3F76ebFC4eE489B0f9F05B4C9662741738267c6  	|Control, Supply Chain Entity   	|
-| 0x9e1595E3224feda3800fD5c3C1F52Fd5BF21A163  	|Minter, Supply Chain Entitiy   	|
-| Other addresses  	|Supply Chain Entity   	|
+|Address  |Role   	| Represents |
+|---	|---	| ---|
+| 0x443007D52e3E285E54FD2F470aaDFFCF7d76A195  	|Admin, Minter   	|Represents an employee of the exemplary organization responsible for access control|
+| 0x90c9425330fC35D63533be3a5B15d95771DedE20  	|Admin   	|Represents an employee of the exemplary organization responsible for administration of the blockhain solution for the supply chain|
+| 0xDa38E26ef4d89617A1f26179A78813869F46a5DB  	|Minter, Supply Chain Entity   	|Represents a tier 4 producer in the supply chain|
+| 0xF18Cd3C0Fc23dfB6A17539352dAB870AfD461904  	|Minter, Supply Chain Entity   	|Represents a tier 3 producer in the supply chain|
+| 0x0942269301f2FD774d794D6aA7865c376511FB3E  	|Minter, Supply Chain Entity   	|Represents a tier 2 producer in the supply chain|
+| 0x860D9b0868f498a7A107430929466246Dec92Efd  	|Minter, Supply Chain Entity   	|Represents a tier 1 producer in the supply chain|
+| 0xC3F76ebFC4eE489B0f9F05B4C9662741738267c6  	|Control, Supply Chain Entity   	|Represents an employee of the exemplary organization responsible to check the adherence of the "Lieferkettengesetz" rules|
+| 0x9e1595E3224feda3800fD5c3C1F52Fd5BF21A163  	|Control, Supply Chain Entitiy   	|Represents an employee of the exemplary organization responsible to check the adherence of the "Lieferkettengesetz" rules|
+| Other addresses  	|Supply Chain Entity   	|Represent a delivery instance in the supply chain|
 
 - Admin role = Supply Chain administrator
 - Minter role = Can mint new tokens, represents a producer in the supply chain
@@ -52,8 +52,8 @@ The Node-RED project contains a flow for every contract. Every flow has a descri
 
 ### Using the prototype
 After you installed the prototype, you can interact with it in the following way using Node-RED:
-- Start a control for an entity by using the **Control** flow. Make sure that the controller is one of the accounts with the Control role. 
-- Simulate the producing and processing of goods with their digital twin by minting and transferring tokens in the **Chain Of Custody Token** flow. It must be noted that at the beginning, all accounts have a **GSE status** of false. This means that the accounts have not accepted the rules from the "Lieferkettengesetz" and every transaction with tokens made by these accounts adds a **NOnGSETransaction** entry to the corresponding accounts. To set the **GSE status** to true, use the **LKG Registry** flow and execute the **Acknowledge "Grundsatzerklärung"** subflow.
+- Start a control for an entity by using the **Control** flow. Make sure that the controller is one of the accounts with the Control role
+- Simulate the producing and processing of goods with their digital twin by minting and transferring tokens in the **Chain Of Custody Token** flow. It must be noted that at the beginning, all accounts have a **GSE status** of false. This means that the accounts have not accepted the rules from the "Lieferkettengesetz" and every transaction with tokens made by these accounts adds a **NonGSETransaction** entry to the corresponding accounts. To set the **GSE status** to true, use the **LKG Registry** flow and execute the **Acknowledge "Grundsatzerklärung"** subflow
 - Query information about entities, controls and non gse transactons using the **LKG Registry** flow 
 
 ## Installation
