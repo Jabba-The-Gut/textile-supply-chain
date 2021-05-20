@@ -34,11 +34,6 @@ The blockchain has 20 associated accounts with predefined roles. The following t
 | 0x9e1595E3224feda3800fD5c3C1F52Fd5BF21A163  	|Control, Supply Chain Entitiy   	|Represents an employee of the exemplary organization responsible to check the adherence of the "Lieferkettengesetz" rules|
 | Other addresses  	|Supply Chain Entity   	|Represent a delivery instance in the supply chain|
 
-- Admin role = Supply Chain administrator
-- Minter role = Can mint new tokens, represents a producer in the supply chain
-- Control role = Controls the circumstances along the supply chain
-- Supply Chain Entity role = Base role. If this is the only role, it means the account represents a delivery instance
-
 ### Smart Contracts
 There are 4 Smart Contracts to simulate a supply chain:
 - **ChainOfCustodyToken**: The token that is the digital twin for physical goods. Is used to mint new tokens and to transfer the tokens between entities
